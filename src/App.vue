@@ -1,48 +1,55 @@
 <template>
-<div id="app">
-<el-container>
-  <el-header>Header</el-header>
-  <el-container>
-    <el-aside width="200px">Aside</el-aside>
+  <div>
     <el-container>
-      <el-main>Main</el-main>
-      <el-footer>Footer</el-footer>
+      <el-container>
+      <el-header>
+        <my-head></my-head>
+      </el-header>
+      <el-main>
+        <keep-alive>
+           <router-view></router-view>
+        </keep-alive>
+        </el-main>
+      <el-footer>
+        ShuaiBiYu Studying
+      </el-footer>
+      </el-container>
     </el-container>
-  </el-container>
-</el-container>
-</div>
+  </div>
 </template>
 
 <script>
+import myHead from './components/head'
 export default {
-  name: 'App'
+  components:{
+    myHead
+  }
 }
 </script>
 
-<style>
-.el-header, .el-footer {
-    background-color: #B3C0D1;
-    color: #333;
+
+
+<style >
+.el-header {
+    padding-left:100px;
+/*    color: #333;*/
     text-align: center;
     line-height: 60px;
   }
-  
-  .el-aside {
-    background-color: #D3DCE6;
+.el-footer {
     color: #333;
     text-align: center;
-    line-height: 200px;
-  }
-  
+    line-height: 60px;
+/*    background-color: rgb(84, 92, 100);*/
+}
   .el-main {
-    background-color: #E9EEF3;
-    color: #333;
-    text-align: center;
-    line-height: 160px;
+    padding-left:100px;
+    padding-right:100px;
+    margin:10px;
   }
   
   body > .el-container {
-    margin-bottom: 40px;
+    margin-bottom: 20px;
   }
   
   .el-container:nth-child(5) .el-aside,
