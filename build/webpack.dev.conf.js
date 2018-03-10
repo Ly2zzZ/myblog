@@ -10,6 +10,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
 
+var appData = require('../db.json')//加载本地数据文件
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
 
@@ -20,8 +21,19 @@ const devWebpackConfig = merge(baseWebpackConfig, {
   // cheap-module-eval-source-map is faster for development
   devtool: config.dev.devtool,
 
+
+
+
   // these devServer options should be customized in /config/index.js
   devServer: {
+        before(app) {
+      app.get('/api/getArticles', (req, res) => {
+        res.json({
+          errno: 0,
+          data: appData.articles
+        })//接口返回json数据，上面配置的数据seller就赋值给data请求后调用
+      })
+    },
     clientLogLevel: 'warning',
     historyApiFallback: {
       rewrites: [

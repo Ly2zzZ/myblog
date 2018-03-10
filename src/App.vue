@@ -18,15 +18,20 @@
   </div>
 </template>
 
+
 <script>
+import { Draw } from './assets/js.js'
 import myHead from './components/head'
 export default {
   components:{
     myHead
+  },
+  created: function () {
+    Draw();
+    //console.log("created");
   }
 }
 </script>
-
 
 
 <style >

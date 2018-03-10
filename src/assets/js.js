@@ -1,4 +1,8 @@
-$(document).ready(function(){
+export function Draw()
+{
+	//console.log("draw")
+	$(document).ready(function(){
+
 // when animating on canvas, it is best to use requestAnimationFrame instead of setTimeout or setInterval
 // not supported in all browsers though and sometimes needs a prefix, so we need a shim
 window.requestAnimFrame = ( function() {
@@ -14,7 +18,7 @@ window.requestAnimFrame = ( function() {
 var canvas = document.getElementById( 'canvasxx' ),
 		ctx = canvas.getContext( '2d' ),
 		// full screen dimensions
-		cw = window.innerWidth,
+		cw = document.getElementById("homepage").offsetWidth,
 		ch = window.innerHeight,
 		// firework collection
 		fireworks = [],
@@ -26,7 +30,7 @@ var canvas = document.getElementById( 'canvasxx' ),
 		limiterTotal = 5,
 		limiterTick = 0,
 		// this will time the auto launches of fireworks, one launch per 80 loop ticks
-		timerTotal = 80,
+		timerTotal = 30,
 		timerTick = 0,
 		mousedown = false,
 		// mouse x coordinate,
@@ -37,7 +41,8 @@ var canvas = document.getElementById( 'canvasxx' ),
 // set canvas dimensions
 canvas.width = cw;
 canvas.height = ch;
-
+//console.log(cw,ch)
+//console.log(canvas)
 // now we are going to setup our function placeholders for the entire demo
 
 // get a random number within a range
@@ -197,6 +202,7 @@ function createParticles( x, y ) {
 
 // main demo loop
 function loop() {
+		//console.log("loop");
 	// this function will run endlessly with requestAnimationFrame
 	requestAnimFrame( loop );
 	
@@ -254,24 +260,7 @@ function loop() {
 	}
 }
 
-// mouse event bindings
-// update the mouse coordinates on mousemove
-canvas.addEventListener( 'mousemove', function( e ) {
-	mx = e.pageX - canvas.offsetLeft;
-	my = e.pageY - canvas.offsetTop;
+loop();
 });
 
-// toggle mousedown state and prevent canvas from being selected
-canvas.addEventListener( 'mousedown', function( e ) {
-	e.preventDefault();
-	mousedown = true;
-});
-
-canvas.addEventListener( 'mouseup', function( e ) {
-	e.preventDefault();
-	mousedown = false;
-});
-
-// once the window loads, we are ready for some fireworks!
-window.onload = loop;
-});
+}
