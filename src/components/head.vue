@@ -8,7 +8,7 @@
   </el-menu-item>
 
   <el-menu-item index="2" >
-      <router-link :to="{path: 'detail/'}" style="text-decoration:none">Article</router-link>
+      <router-link :to="{path: '/detail'}" style="text-decoration:none">Article</router-link>
   </el-menu-item>
 
   <el-menu-item index="3" >
@@ -26,7 +26,7 @@
     <template v-for="(item,index) in catelist">
 
       <el-menu-item index="5">
-        <router-link :to="{path: 'detail'}" style="text-decoration:none">{{item}}</router-link>
+        <router-link :to="{path: '/detail'}" style="text-decoration:none">{{item}}</router-link>
       </el-menu-item>
     </template>
 
@@ -55,12 +55,12 @@
     created: function (){
       this.$http.get('/api/getArticles')
       .then((res) => {
-        //console.log(res.data.data)
+        //console.log(res.data)
         for (let item in res.data.data)
           this.catelist.push(res.data.data[item].cate);
 
         this.catelist=Array.from(new Set(this.catelist));
-        //console.log(this.catelist)
+      //  console.log(this.catelist)
       }),(err) => {
         console.log(err)
       }

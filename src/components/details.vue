@@ -1,6 +1,6 @@
 <template>
   <div id="ArticleHomePage">
-      <template v-for="item in articles">
+      <template v-for="item in showpage">
         <div id='EachArticle' :class=item.cate>
         <a href="">
         <p>{{item.title}}</p>
@@ -22,11 +22,13 @@
         </div>
       </template>
 
-    <el-pagination
-      background
-      layout="prev, pager, next"
-      :total="1000">
-    </el-pagination>
+      <el-pagination
+        background
+        layout="prev, pager, next"
+        :page-count="total"
+        @current-change="show"
+        :current-page.sync="nowpage">
+      </el-pagination>
   </div>
 </template>
 
@@ -35,27 +37,42 @@ export default {
   name: 'detai',
   data () {
     return {
-      articles:[]
+      totalpage:0,
+      articles:[],
+      nowpage:1
     }
   },
-    created: function (){
+  computed:{
+    total () {
+      return this.totalpage;
+    },
+    showpage () {
+     // console.log(this.nowpage);
+      return this.articles[this.nowpage-1];
+    },
+    totalnum () {
+      return this.total;
+    }
+  },
+    beforeCreate: function (){
       this.$http.get('/api/getArticles')
       .then((res) => {
-        this.articles=res.data.data;
-        if (this.articles.length>6)
+        let ress=res.data.data;
+        let len=ress.length;
+       // console.log(len)
+        for (let i=0;i<len;i+=6)
         {
-          let x= document.getElementById('ArticleHomePage').offsetHeight;
-          console.log(x);
-          $("#ArticleHomePage").css("height", x+(this.articles.length-6)*x/6);//通过设置CSS属性来设置元素的高
-
+          this.articles.push(ress.slice(i,i+6));
         }
+      // console.log(this.articles)
+        this.totalpage=this.articles.length;
       }),(err) => {
         console.log(err)
       }
     },
     methods:{
-      Show () {
-
+      show () {
+        console.log(this.nowpage)
       }
     }
 }
@@ -63,6 +80,9 @@ export default {
 
 
 <style scoped> 
+el-pagination{
+  text-align: center;
+}
 span{
     display: block;
     color: #999;
@@ -82,8 +102,9 @@ a:hover{
   text-decoration: underline;
 }
 #ArticleHomePage{
+    text-align: center;
   width: 100%;
-  height: 800px;
+  height: 900px;
   overflow: hidden;
   overflow-x: hidden;
 }
