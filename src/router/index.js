@@ -4,8 +4,9 @@ import Router from 'vue-router'
 import IndexPage from '../components/Index'
 
 import details from '../components/details'
-import detail1 from '../components/detail1'
-import detail2 from '../components/detail2'
+import Categories from '../components/detail1'
+import All from '../components/detail2'
+import articlemode from '../components/articles/mode'
 
 Vue.use(Router)
 
@@ -19,14 +20,19 @@ export default new Router({
     {
     	path:'/detail',
       component:details,
+      redirect: '/detail/All',
     	children:[
+      {
+        path:'All',
+        component:All
+      },
+      {
+        path:'article/:artcileid',
+        component:articlemode
+      },
     	{
-    		path:'1',
-    		component:detail1
-    	},
-    	{
-    		path:'2',
-    		component:detail2
+    		path:'Categories/:cate',
+    		component:Categories
     	}
     	]
     	

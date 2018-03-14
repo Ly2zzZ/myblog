@@ -1,34 +1,8 @@
 <template>
   <div id="ArticleHomePage">
-      <template v-for="item in showpage">
-        <div id='EachArticle' :class=item.cate>
-        <a href="">
-        <p>{{item.title}}</p>
-        </a>
-        <span>
-        <i class="el-icon-date"></i> 
-        发表于 {{item.date}}
-        |
-        <i class="el-icon-tickets"></i> 
-        分类于 
-        <a href="">{{item.cate}}</a>
-        |
-        <i class="el-icon-view"></i>
-        阅读数 {{item.readnum}}
-        |
-        <i class="el-icon-star-off"></i>
-        喜欢 {{item.readnum}}
-        </span>
-        </div>
-      </template>
-
-      <el-pagination
-        background
-        layout="prev, pager, next"
-        :page-count="total"
-        @current-change="show"
-        :current-page.sync="nowpage">
-      </el-pagination>
+    <keep-alive>
+      <router-view></router-view>
+    </keep-alive>
   </div>
 </template>
 
@@ -71,9 +45,6 @@ export default {
       }
     },
     methods:{
-      show () {
-        console.log(this.nowpage)
-      }
     }
 }
 </script>

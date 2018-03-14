@@ -40,13 +40,14 @@ export default {
 /*    color: #333;*/
     text-align: center;
     line-height: 60px;
+/*    background-color: #9caebf; */
   }
 .el-footer {
     color: #333;
     text-align: center;
     line-height: 60px;
-/*    background-color: rgb(84, 92, 100);*/
-}
+/*    background-color: #9caebf; */
+  }
   .el-main {
     padding-left:100px;
     padding-right:100px;
@@ -55,6 +56,7 @@ export default {
   
   body > .el-container {
     margin-bottom: 20px;
+    background-color: #636b6f;
   }
   
   .el-container:nth-child(5) .el-aside,

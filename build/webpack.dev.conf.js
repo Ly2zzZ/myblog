@@ -11,6 +11,7 @@ const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
 
 var appData = require('../db.json')//加载本地数据文件
+console.log(appData.articledetails[1]);
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
 
@@ -31,6 +32,20 @@ const devWebpackConfig = merge(baseWebpackConfig, {
         res.json({
           errno: 0,
           data: appData.articles
+        })//接口返回json数据，上面配置的数据seller就赋值给data请求后调用
+      })
+      app.get('/api/articledetails', (req, res) => {
+        console.log(req.query.ID);
+        let temp=null;
+         for (let i=0;i<appData.articledetails.length;i++)
+            {
+              console.log(i,appData.articledetails[i].id)
+              if (appData.articledetails[i].id==req.query.ID)
+                temp= appData.articledetails[i].content;
+            }
+        res.json({
+          errno: 0,
+          data: temp
         })//接口返回json数据，上面配置的数据seller就赋值给data请求后调用
       })
     },
