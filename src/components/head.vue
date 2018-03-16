@@ -1,14 +1,12 @@
 <template>
   <div id="guide">
 
-<el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect" >
+<el-menu :default-active="activeIndex" router class="el-menu-demo" mode="horizontal" @select="handleSelect" >
     <span style="font-weight: lighter; font-size: 30px;font-weight: lighter; color:black">______罗瑜的博客____________</span>
-  <el-menu-item index="1">
-      <router-link :to="{path: '/'}" style="text-decoration:none">Home</router-link>
-  </el-menu-item>
+  <el-menu-item index="/home">Home</el-menu-item>
 
-  <el-menu-item index="2" >
-      <router-link :to="{path: '/detail'}" style="text-decoration:none">Articles</router-link>
+  <el-menu-item index="/articleAll">
+    Articles
   </el-menu-item>
 
   <el-menu-item index="3" >
@@ -20,12 +18,12 @@
   </el-menu-item>
 
 
-  <el-submenu index="5">
+  <el-submenu index="">
     <template slot="title">Categories</template>
 
     <template v-for="(item,index) in catelist">
-      <el-menu-item index=item @click="ChangeCate(item)">
-        <router-link :to="{path: '/detail/Categories/'+item }" style="text-decoration:none">{{item}}</router-link>
+      <el-menu-item index='/Categories/item' @click="ChangeCate(item)">
+        {{item}}
       </el-menu-item>
     </template>
 
@@ -51,7 +49,7 @@
       //  console.log(key, keyPath);
       },
       ChangeCate (aim){
-        console.log("headchange",aim)
+        //console.log("headchange",aim)
         this.$store.dispatch('change',aim)
       }
     },
@@ -59,10 +57,10 @@
       this.$http.get('/api/getArticles')
       .then((res) => {
        // console.log(res.data.data)
-        this.$store.dispatch('getArticlesAction',res.data.data.slice(0,res.data.data.length))
-        console.log("head",this.$store.getters.getArticles)
-        for (let item in res.data.data)
-          this.catelist.push(res.data.data[item].cate);
+        this.$store.dispatch('getArticlesAction',res.data.slice(0,res.data.length))
+       // console.log("head",this.$store.getters.getArticles)
+        for (let item in res.data)
+          this.catelist.push(res.data[item].cate);
         this.catelist=Array.from(new Set(this.catelist));
       //  console.log(this.catelist)
       }),(err) => {

@@ -15,25 +15,29 @@ export default new Router({
   routes: [
     {
       path: '/',
-      component: IndexPage
+      component: IndexPage,
+      redirect:'/home'
     },
     {
-    	path:'/detail',
+      path: '/home',
+      component: IndexPage,
+    },
+    {
+      path:'/articleAll',
+      component:All
+    },
+    {
+        path:'/Categories/:cate',
+        component:Categories
+    },
+    {
+    	path:'/article',
       component:details,
-      redirect: '/detail/All',
     	children:[
       {
-        path:'All',
-        component:All
-      },
-      {
-        path:'article/:artcileid',
+        path:':artcileid',
         component:articlemode
-      },
-    	{
-    		path:'Categories/:cate',
-    		component:Categories
-    	}
+      }
     	]
     	
     }

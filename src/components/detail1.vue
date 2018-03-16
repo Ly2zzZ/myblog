@@ -1,10 +1,11 @@
 <template>
-  <div>
+  <div id="ArticleHomePage">
      <template v-for="item in showpage">
         <div id='EachArticle' :class=item.cate>
-        <router-link :to="{path: '/detail/article/'+item.id }" 
-        style="text-decoration:none" @click="submit">
-           <p @click="submit">{{item.title}}</p>
+        <router-link  
+        :to="{path: '/article/'+item.id }" 
+        style="text-decoration:none">
+           <p >{{item.title}}</p>
         </router-link>
         <span>
         <i class="el-icon-date"></i> 
@@ -22,13 +23,6 @@
         </span>
         </div>
       </template>
-
-<!--       <el-pagination
-        background
-        layout="prev, pager, next"
-        :page-count="total"
-        :current-page.sync="nowpage">
-      </el-pagination> -->
   </div>
 </template>
 
@@ -38,13 +32,12 @@ export default {
   name: 'detai',
   data () {
     return {
-      totalpage:0,
-      nowpage:'',
+      articles:[]
     }
   },
   computed:{
     showpage () {
-      console.log("d1",this.$store.getters.getArticles);
+     // console.log("d1",this.$store.getters.getArticles);
      // console.log(this.articles);
      let articles=[];
      let ress=this.$store.getters.getArticles.slice(0,this.$store.getters.getArticles.length);
@@ -59,19 +52,21 @@ export default {
         		}
           articles[String(ress[i].cate)].push(ress[i]);
         }
-      //  console.log(articles)
+        //console.log(articles)
+
       return articles[this.$store.getters.getAim];
     }
   },
   	Nowcate (){
-  		console.log("d2",this.$store.getters.NowCate)
+  		//console.log("d2",this.$store.getters.NowCate)
   		return this.$store.getters.NowCate
   	},
     methods:{
         submit () {
           console.log("1 ed")
           this.$root.Bus.$emit('artchange');
-        }
+        },
+        
     }
 }
 </script>
@@ -90,20 +85,14 @@ span{
     margin-bottom: 80px; 
 }
 p{
+      color:black;
       text-align: center;
 }
 a{
-  color: #999;
+  color:#999;
   text-decoration: none;
 }
 a:hover{
   text-decoration: underline;
-}
-#ArticleHomePage{
-    text-align: center;
-  width: 100%;
-  height: 900px;
-  overflow: hidden;
-  overflow-x: hidden;
 }
 </style>

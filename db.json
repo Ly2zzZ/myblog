@@ -1,9 +1,9 @@
 {
         "articles":[
     {
-      "title":"测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字",
-      "date":"2018-03-08",
-      "cate":"A",
+      "title":"处女面之他只想和我聊会天自己摸会鱼",
+      "date":"2018-03-15",
+      "cate":"面试",
       "readnum":100,
       "liked":999,
       "id":1
@@ -62,7 +62,7 @@
     "articledetails":[
       {
         "id":1,
-        "content":"<h1>自定义组件1111!</h1>"
+        "content":"<p style='display:block;'>2018春招还是感觉自己准备不够,阿里一面虽然问得都能答上来,但是每次面试官对问题问为什么之类的,就有点难受了,虽然面试官可能只是无聊能多聊会,自己摸摸鱼,但是对于我自己在问题上没有深入钻研还是说得很有道理,希望在接下来的学习中能够深入学习工作所需的知识内容</p><h3 style='font-weight:bold'>话不多说,先来看题</h3><ul style='color:#555;list-style-type:disc;list-style:circle;'><li><strong>js垃圾回收机制</strong></li><li><strong>函数作用域</strong></li><li><strong>js设计模式</strong></li><li><strong>svgcanvas优劣</strong></li><li><strong>http2新特性</strong></li><li><strong>你认为怎么最快地学习一个框架</strong></li><li><strong>你认为什么叫熟悉一个框架</strong></li><li><strong>你能为团队带来什么</strong></li><li><strong>你来实习想要什么</strong></li><li><strong>你有什么问题想问的</strong></li></ul><h3>大致记得就这些吧</h3>"
       },
       {
         "id":2,
@@ -73,7 +73,7 @@
         "content":"<h1>自定义组件3333!</h1>"
       },
       {
-        "id":54,
+        "id":4,
         "content":"<h1>自定义组件4444!</h1>"
       },
       {
@@ -86,7 +86,7 @@
       },
       {
         "id":7,
-        "content":"<h1>自定义组件7777!</h1>"
+        "content":"<h1>自定义组件6666!</h1>"
       }
     ]
 }

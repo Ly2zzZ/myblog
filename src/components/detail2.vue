@@ -1,9 +1,11 @@
 <template>
-  <div>
+  <div id="ArticleHomePage">
      <template v-for="item in showpage">
         <div id='EachArticle' :class=item.cate>
-        <router-link :to="{path: '/detail/article/'+item.id }" style="text-decoration:none">
-           <p>{{item.title}}</p>
+        <router-link 
+        :to="{path: '/article/'+item.id }" 
+        style="text-decoration:none">
+           <p >{{item.title}}</p>
         </router-link>
         <span>
         <i class="el-icon-date"></i> 
@@ -48,6 +50,13 @@ export default {
     },
     showpage () {
      // console.log(this.nowpage);
+        let ress=this.$store.getters.getArticles.slice(0,this.$store.getters.getArticles.length);
+        let len=ress.length;
+       // console.log(len)
+        for (let i=0;i<len;i+=6)
+        {
+          this.articles.push(ress.slice(i,i+6));
+        }
       return this.articles[this.nowpage-1];
     },
     totalnum () {
@@ -57,13 +66,6 @@ export default {
     beforeCreate: function (){
       this.$http.get('/api/getArticles')
       .then((res) => {
-        let ress=res.data.data;
-        let len=ress.length;
-       // console.log(len)
-        for (let i=0;i<len;i+=6)
-        {
-          this.articles.push(ress.slice(i,i+6));
-        }
       // console.log(this.articles)
         this.totalpage=this.articles.length;
       }),(err) => {
@@ -71,6 +73,10 @@ export default {
       }
     },
     methods:{
+/*        submit () {
+          console.log("1 ed")
+          this.$root.Bus.$emit('xxartchange',"as");
+        }*/
     }
 }
 </script>
@@ -89,20 +95,15 @@ span{
     margin-bottom: 80px; 
 }
 p{
+      color:black;
       text-align: center;
 }
 a{
-  color: #999;
+ 
+ color:#999;
   text-decoration: none;
 }
 a:hover{
   text-decoration: underline;
-}
-#ArticleHomePage{
-    text-align: center;
-  width: 100%;
-  height: 900px;
-  overflow: hidden;
-  overflow-x: hidden;
 }
 </style>

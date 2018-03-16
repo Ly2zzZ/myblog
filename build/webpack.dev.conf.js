@@ -41,7 +41,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
             {
               console.log(i,appData.articledetails[i].id)
               if (appData.articledetails[i].id==req.query.ID)
-                temp= appData.articledetails[i].content;
+                temp= appData.articledetails[i];
             }
         res.json({
           errno: 0,
