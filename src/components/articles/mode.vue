@@ -69,10 +69,10 @@ export default {
 		  })
 		  .then((response)=>{
 		  	//console.log(response)
-		  	this.temp=response.data.content
+		  	this.temp=response.data.data.content
 		  })
 		  .catch(function (error) {
-		   // console.log(error);
+		    console.log(error);
 		  });
 		}
 	},

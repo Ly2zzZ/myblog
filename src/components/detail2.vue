@@ -58,20 +58,8 @@ export default {
           this.articles.push(ress.slice(i,i+6));
         }
       return this.articles[this.nowpage-1];
-    },
-    totalnum () {
-      return this.total;
     }
   },
-    beforeCreate: function (){
-      this.$http.get('/api/getArticles')
-      .then((res) => {
-      // console.log(this.articles)
-        this.totalpage=this.articles.length;
-      }),(err) => {
-        console.log(err)
-      }
-    },
     methods:{
 /*        submit () {
           console.log("1 ed")

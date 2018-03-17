@@ -7,7 +7,7 @@ import details from '../components/details'
 import Categories from '../components/detail1'
 import All from '../components/detail2'
 import articlemode from '../components/articles/mode'
-
+import message from '../components/message'
 Vue.use(Router)
 
 export default new Router({
@@ -16,15 +16,14 @@ export default new Router({
     {
       path: '/',
       component: IndexPage,
-      redirect:'/home'
-    },
-    {
-      path: '/home',
-      component: IndexPage,
     },
     {
       path:'/articleAll',
       component:All
+    },
+    {
+      path:'/message',
+      component:message
     },
     {
         path:'/Categories/:cate',
