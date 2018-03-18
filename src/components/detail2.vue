@@ -50,15 +50,19 @@ export default {
     },
     showpage () {
      // console.log(this.nowpage);
-        let ress=this.$store.getters.getArticles.slice(0,this.$store.getters.getArticles.length);
-        let len=ress.length;
-       // console.log(len)
-        for (let i=0;i<len;i+=6)
-        {
-          this.articles.push(ress.slice(i,i+6));
-        }
       return this.articles[this.nowpage-1];
     }
+  },
+  created:function(){
+      let ress=this.$store.getters.getArticles.slice(0,this.$store.getters.getArticles.length);
+      let len=ress.length;
+      // console.log(len)
+      for (let i=0;i<len;i+=6)
+      {
+      this.articles.push(ress.slice(i,i+6));
+      }
+      //console.log(this.articles)
+      this.totalpage=this.articles.length;
   },
     methods:{
 /*        submit () {

@@ -34,14 +34,14 @@
   	</div>
   	<p>{{item.content}}</p>
 
-  	<template v-for="(items,indexs) in item.reply">
+<!--   	<template v-for="(items,indexs) in item.reply">
  	 <div  class="text item">
     	<el-card class="box-card">
     		<span>{{items.name}} 回复: {{item.name}}</span>
     		<p>{{items.content}}</p>
     	</el-card>
  	 </div>
-	</template>
+	</template> -->
 
 	</el-card>
 	</template>
@@ -86,7 +86,8 @@ export default {
       dialogTableVisible: false,
       dialogFormVisible: false,
       formLabelWidth: '120px',
-      Nowreply:0
+      Nowreply:0,
+      commitsOb:0
     }
   },
   computed:{
@@ -99,9 +100,26 @@ export default {
   },
   methods:{
   	Addcommits (){
-		console.log("对象", this.textarea)
+		//console.log("对象", this.textarea)
 		this.contents.push({"name":this.textarea.name,"content":this.textarea.content,"reply":[]})
-		console.log(this.contents)
+
+    this.$ajax.get('/api/addcommits', {
+        params: {
+          Pid:this.commitsOb,
+          name:this.textarea.name,
+          content:this.textarea.content,
+          date:"2018-2-2"
+        }
+      })
+      .then((response)=>{
+        this.commitsOb++;
+        console.log("successful!!!!!!!!!!!!!!!!!!!")
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+		//console.log(this.contents)
 	},
   	something(index){
   		this.Nowreply=index;
@@ -109,9 +127,9 @@ export default {
   	},
   	addreply(){
   		this.dialogFormVisible = false;
-  		console.log(this.contents[this.replyNow])
-  		console.log(this.reply)
-  		console.log(this.replyNow)
+  		//console.log(this.contents[this.replyNow])
+  		//console.log(this.reply)
+  		//console.log(this.replyNow)
 
   		this.contents[this.replyNow].reply.push({"name":this.reply.name,"content":this.reply.content});
   	}
@@ -119,8 +137,13 @@ export default {
   created:function(){
   	this.$ajax.get('/api/commits')
   		.then((re)=>{
-  			this.contents=re.data.data
-  			console.log(this.contents);
+         console.log(re.data);
+  			//this.contents=re.data.data;
+        this.contents=re.data;
+
+        this.commitsOb=this.contents.length+1;
+         console.log(this.contents);
+
   		})
   		.catch(function (error) {
 		    console.log(error);

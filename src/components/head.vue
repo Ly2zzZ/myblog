@@ -2,7 +2,7 @@
   <div id="guide">
 
 <el-menu :default-active="activeIndex" router class="el-menu-demo" mode="horizontal" @select="handleSelect" >
-    <span style="font-weight: lighter; font-size: 30px;font-weight: lighter; color:black">______罗瑜的博客____________</span>
+    <span style="font-weight: lighter; font-size: 30px;font-weight: lighter; color:black">欢迎来到米奇妙妙污</span>
   <el-menu-item index="/">Home</el-menu-item>
 
   <el-menu-item index="/articleAll">
@@ -57,12 +57,14 @@
     },
     beforeCreate: function (){
       this.$http.get('/api/getArticles')
-      .then((res) => {
-       // console.log(res.data.data)
-        this.$store.dispatch('getArticlesAction',res.data.data.slice(0,res.data.data.length))
+      .then((ress) => {
+        console.log(ress.data)
+      // let res=ress.data.data;
+       let res=ress.data;
+        this.$store.dispatch('getArticlesAction',res.slice(0,res.length))
        // console.log("head",this.$store.getters.getArticles)
-        for (let item in res.data.data)
-          this.catelist.push(res.data.data[item].cate);
+        for (let item in res)
+          this.catelist.push(res[item].cate);
         this.catelist=Array.from(new Set(this.catelist));
       //  console.log(this.catelist)
       }),(err) => {
