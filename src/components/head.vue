@@ -58,7 +58,7 @@
     beforeCreate: function (){
       this.$http.get('/api/getArticles')
       .then((ress) => {
-        console.log(ress.data)
+       // console.log(ress.data)
       // let res=ress.data.data;
        let res=ress.data;
         this.$store.dispatch('getArticlesAction',res.slice(0,res.length))

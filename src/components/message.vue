@@ -30,18 +30,18 @@
 	<el-card class="box-card">
   	<div slot="header" class="clearfix">
     	<span>{{item.name}}</span>
-    	<el-button style="float: right; padding: 1px 0" type="text" @click="something(index)">回复Ta</el-button>
+    	<el-button style="float: right; padding: 1px 0" type="text" @click="something(index,item.Pid)">回复Ta</el-button>
   	</div>
   	<p>{{item.content}}</p>
 
-<!--   	<template v-for="(items,indexs) in item.reply">
+  	<template v-for="(items,indexs) in item.reply">
  	 <div  class="text item">
     	<el-card class="box-card">
     		<span>{{items.name}} 回复: {{item.name}}</span>
     		<p>{{items.content}}</p>
     	</el-card>
  	 </div>
-	</template> -->
+	</template>
 
 	</el-card>
 	</template>
@@ -86,19 +86,27 @@ export default {
       dialogTableVisible: false,
       dialogFormVisible: false,
       formLabelWidth: '120px',
+      Nowreplyshow:0,
       Nowreply:0,
       commitsOb:0
     }
   },
   computed:{
   	replyNow:function(){
-  		return this.Nowreply;
+  		return this.Nowreplyshow;
   	},
   	content:function(){
   		return this.contents;
   	}
   },
   methods:{
+    Notify(inf) {
+        const h = this.$createElement;
+        this.$notify({
+          title: '消息通知',
+          message: h('i', { style: 'color: teal'}, inf)
+        });
+      },
   	Addcommits (){
 		//console.log("对象", this.textarea)
 		this.contents.push({"name":this.textarea.name,"content":this.textarea.content,"reply":[]})
@@ -113,16 +121,19 @@ export default {
       })
       .then((response)=>{
         this.commitsOb++;
-        console.log("successful!!!!!!!!!!!!!!!!!!!")
+        this.Notify("评论成功")
+        //console.log("successful!!!!!!!!!!!!!!!!!!!")
       })
       .catch(function (error) {
+        this.Notify("评论失败...")
         console.log(error);
       });
 
 		//console.log(this.contents)
 	},
-  	something(index){
-  		this.Nowreply=index;
+  	something(index,id){
+  		this.Nowreplyshow=index;
+      this.Nowreply=id;
   		this.dialogFormVisible = true;
   	},
   	addreply(){
@@ -130,6 +141,22 @@ export default {
   		//console.log(this.contents[this.replyNow])
   		//console.log(this.reply)
   		//console.log(this.replyNow)
+      this.$ajax.get('/api/addreply', {
+          params: {
+            Rid:this.Nowreply,
+            name:this.reply.name,
+            content:this.reply.content,
+            date:"2018-2-2"
+          }
+        })
+        .then((response)=>{
+          this.Notify("评论成功")
+          //console.log("successful!!!!!!!!!!!!!!!!!!!")
+        })
+        .catch(function (error) {
+          this.Notify("评论失败...");
+          //console.log(error);
+        });
 
   		this.contents[this.replyNow].reply.push({"name":this.reply.name,"content":this.reply.content});
   	}
@@ -137,12 +164,12 @@ export default {
   created:function(){
   	this.$ajax.get('/api/commits')
   		.then((re)=>{
-         console.log(re.data);
+        // console.log(re.data);
   			//this.contents=re.data.data;
         this.contents=re.data;
 
         this.commitsOb=this.contents.length+1;
-         console.log(this.contents);
+         //console.log(this.contents);
 
   		})
   		.catch(function (error) {

@@ -68,7 +68,7 @@ export default {
 		    }
 		  })
 		  .then((response)=>{
-		  	console.log(response.data)
+		  	//console.log(response.data)
 		  	//this.temp=response.data.data.content
 		  	this.temp=response.data[0].content
 		  })
