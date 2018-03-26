@@ -50,6 +50,7 @@ export default {
 
 <style >
 #ArticleHomePage{
+  overflow:hidden;
   text-align: center;
   width: 100%;
   min-height: 900px;
@@ -74,6 +75,8 @@ body{
 /*    background-color: #9caebf; */
   }
   .el-main {
+    overflow:hidden;
+    height: auto;
     padding-left:100px;
     padding-right:100px;
     margin:10px;

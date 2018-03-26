@@ -52,7 +52,9 @@ export default {
 			//console.log(to.params.artcileid,from.params.artcileid,this.$route.params.artcileid)
 			if (this.$route.params.artcileid!=undefined)
 			{
-				this.details=this.$store.getters.getArticles[to.params.artcileid-1];
+				for (let i=0;i<this.$store.getters.getArticles.length;i++)
+					if (to.params.artcileid==this.$store.getters.getArticles[i].id)
+						this.details=this.$store.getters.getArticles[i];
 				//console.log(this.details);
 			}
 			
@@ -61,6 +63,14 @@ export default {
 		}
 	},
 	methods:{ 
+      com(ob1,ob2)
+      {
+        if (ob1.date>ob2.date)
+          return -1;
+        else if(ob1.date<ob2.date)
+          return 1;
+        else return 0;
+      },
 		artchange:function(params){
 		this.$ajax.get('/api/articledetails', {
 		    params: {
@@ -78,13 +88,30 @@ export default {
 		}
 	},
 	created:function (){
-		this.details=this.$store.getters.getArticles[this.$route.params.artcileid-1];
+		for (let i=0;i<this.$store.getters.getArticles.length;i++)
+			if (this.$route.params.artcileid==this.$store.getters.getArticles[i].id)
+				this.details=this.$store.getters.getArticles[i];
 		this.artchange(this.articleidxx);
 	},
 	mounted (){
 /*		this.$root.Bus.$on('xxartchange',()=>{
 			this.artchange(this.articleidxx);
 		})*/
+	},
+	beforeCreate:function(){
+		      this.$http.get('/api/getArticles')
+      .then((ress) => {
+       // console.log(ress.data)
+      // let res=ress.data.data;
+       let res=ress.data;
+       res.sort(this.com);
+/*       res.forEach(function(item,index){
+        item.id=index;
+        });*/
+        this.$store.dispatch('getArticlesAction',res.slice(0,res.length))
+      }),(err) => {
+        console.log(err)
+      }
 	}
 }
 
@@ -102,7 +129,9 @@ p{
 	color: black;
 }
 #artmode{
+	height: auto;
 	text-align: center;
+	overflow:hidden;
 }
 a{
   color:#999;
@@ -112,6 +141,8 @@ a:hover{
   text-decoration: underline;
 }
 #showcontent{
+	overflow:hidden;
+	height: auto;
 	text-align: justify;
 	left: 0;
 	right: 0;

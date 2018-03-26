@@ -57,16 +57,22 @@ export default {
       return articles[this.$store.getters.getAim];
     }
   },
-  	Nowcate (){
-  		//console.log("d2",this.$store.getters.NowCate)
-  		return this.$store.getters.NowCate
+  	beforeCreate:function(){
+      
   	},
     methods:{
         submit () {
           console.log("1 ed")
           this.$root.Bus.$emit('artchange');
         },
-        
+      com(ob1,ob2)
+      {
+        if (ob1.date>ob2.date)
+          return -1;
+        else if(ob1.date<ob2.date)
+          return 1;
+        else return 0;
+      }
     }
 }
 </script>

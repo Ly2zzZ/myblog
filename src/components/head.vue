@@ -53,6 +53,14 @@
       ChangeCate (aim){
         //console.log("headchange",aim)
         this.$store.dispatch('change',aim)
+      },
+      com(ob1,ob2)
+      {
+        if (ob1.date>ob2.date)
+          return -1;
+        else if(ob1.date<ob2.date)
+          return 1;
+        else return 0;
       }
     },
     beforeCreate: function (){
@@ -61,6 +69,10 @@
        // console.log(ress.data)
       // let res=ress.data.data;
        let res=ress.data;
+       res.sort(this.com);
+/*       res.forEach(function(item,index){
+        item.id=index;
+        });*/
         this.$store.dispatch('getArticlesAction',res.slice(0,res.length))
        // console.log("head",this.$store.getters.getArticles)
         for (let item in res)

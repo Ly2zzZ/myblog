@@ -49,11 +49,13 @@ export default {
       return this.totalpage;
     },
     showpage () {
-     // console.log(this.nowpage);
+     // console.log(this.articles);
       return this.articles[this.nowpage-1];
     }
   },
   created:function(){
+    //console.log("created");
+    //console.log(this.$store.getters.getArticles)
       let ress=this.$store.getters.getArticles.slice(0,this.$store.getters.getArticles.length);
       let len=ress.length;
       // console.log(len)
@@ -61,14 +63,52 @@ export default {
       {
       this.articles.push(ress.slice(i,i+6));
       }
-      //console.log(this.articles)
+      console.log(this.articles)
       this.totalpage=this.articles.length;
   },
     methods:{
+      com(ob1,ob2)
+      {
+        if (ob1.date>ob2.date)
+          return -1;
+        else if(ob1.date<ob2.date)
+          return 1;
+        else return 0;
+      }
 /*        submit () {
           console.log("1 ed")
           this.$root.Bus.$emit('xxartchange',"as");
         }*/
+    },
+    beforeCreate:function(){
+      //console.log("beforecreated");
+      this.$http.get('/api/getArticles')
+      .then((ress) => {
+       // console.log(ress.data)
+      // let res=ress.data.data;
+       let res=ress.data;
+       res.sort(this.com);
+/*       res.forEach(function(item,index){
+        item.id=index;
+        });*/
+        this.$store.dispatch('getArticlesAction',res.slice(0,res.length));
+
+        if (this.articles.length==0)
+          {      
+        //console.log(this.$store.getters.getArticles)
+        let resss=this.$store.getters.getArticles.slice(0,this.$store.getters.getArticles.length);
+        let len=resss.length;
+        // console.log(len)
+        for (let i=0;i<len;i+=6)
+        {
+        this.articles.push(resss.slice(i,i+6));
+        }
+        //console.log(this.articles)
+        this.totalpage=this.articles.length;
+      }
+        }),(err) => {
+        console.log(err)
+      }
     }
 }
 </script>
