@@ -50,18 +50,15 @@ export default {
 
 <style >
 #ArticleHomePage{
-  overflow:hidden;
-  text-align: center;
-  width: 100%;
-  min-height: 900px;
-  overflow: hidden;
-  overflow-x: hidden;
-  height: auto;
+    width: 100%;
+    min-height: 900px;
+    height: auto; 
 }
 body{
   font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
 }
 .el-header {
+    width: 100%;
     padding-left:100px;
 /*    color: #333;*/
     text-align: center;

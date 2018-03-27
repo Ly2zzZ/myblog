@@ -115,7 +115,7 @@ export default {
 
 
 <style scoped> 
-el-pagination{
+.el-pagination{
   text-align: center;
 }
 span{

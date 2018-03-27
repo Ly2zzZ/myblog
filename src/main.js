@@ -21,13 +21,17 @@ var bus=new Vue()
 let store = new Vuex.Store({
 	state:{
 		NowCate:'',
-		getArticles:[]
+		getArticles:[],
+		articledetails:[]
 	},
 	getters:{
 		getAim (state) {
 			return state.NowCate
 		},
 		getArticles (state){
+			return state.getArticles
+		},
+		getarticledetails (state){
 			return state.getArticles
 		}
 	},

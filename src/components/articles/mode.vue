@@ -1,6 +1,7 @@
 <template>
 	<div id="artmode">
-	<h2 >{{titles.title}}</h2>
+		<div>
+		<h2 >{{titles.title}}</h2>
         <span>
         <i class="el-icon-date"></i> 
         发表于 {{titles.date}}
@@ -15,6 +16,7 @@
         <i class="el-icon-star-off"></i>
         喜欢 {{titles.readnum}}
         </span>
+        </div>
 	<div v-html="content" @artchange="artchange" id="showcontent"></div>
 	</div>
 </template>
@@ -56,9 +58,11 @@ export default {
 					if (to.params.artcileid==this.$store.getters.getArticles[i].id)
 						this.details=this.$store.getters.getArticles[i];
 				//console.log(this.details);
-			}
+
+			console.log(to.params.artcileid);
 			
 			this.artchange(to.params.artcileid);
+			}
 
 		}
 	},
@@ -129,9 +133,9 @@ p{
 	color: black;
 }
 #artmode{
-	height: auto;
-	text-align: center;
-	overflow:hidden;
+    height: auto;
+    width: 100%;
+    text-align: center;
 }
 a{
   color:#999;
@@ -141,15 +145,10 @@ a:hover{
   text-decoration: underline;
 }
 #showcontent{
-	overflow:hidden;
-	height: auto;
-	text-align: justify;
-	left: 0;
-	right: 0;
-	margin: auto;
-	position: absolute;
-	width: 70%;
-	line-height:30px;
-    font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
+    display: inline-block;
+    text-align: justify;
+    width: 70%;
+    line-height: 30px;
+    font-family: Lato,PingFang SC,Microsoft YaHei,sans-serif;
 }
 </style>
