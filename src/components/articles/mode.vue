@@ -105,13 +105,12 @@ export default {
 	beforeCreate:function(){
 		      this.$http.get('/api/getArticles')
       .then((ress) => {
-       // console.log(ress.data)
-      // let res=ress.data.data;
-       let res=ress.data;
+      	var res;
+      	if (Object.prototype.toString.call(ress.data)=='[object Array]')
+          res=ress.data;
+      else res=ress.data.data;
        res.sort(this.com);
-/*       res.forEach(function(item,index){
-        item.id=index;
-        });*/
+
         this.$store.dispatch('getArticlesAction',res.slice(0,res.length))
       }),(err) => {
         console.log(err)

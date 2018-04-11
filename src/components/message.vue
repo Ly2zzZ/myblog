@@ -166,7 +166,9 @@ export default {
   		.then((re)=>{
         // console.log(re.data);
   			//this.contents=re.data.data;
-        this.contents=re.data;
+        if (Object.prototype.toString.call(re.data)=='[object Array]')
+            this.contents=re.data;
+        else this.contents=re.data.data;
 
         this.commitsOb=this.contents.length+1;
          //console.log(this.contents);
