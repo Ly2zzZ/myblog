@@ -48,7 +48,26 @@ export default {
 </script>
 
 
-<style >
+<style>
+@media screen and (max-width: 3000px){
+  .PCshow{
+    display: block;
+  }
+  .Phoneshow{
+    display: none;
+  }
+}
+@media screen and (max-width: 1100px){
+  .PCshow{
+    display: none;
+  }
+  .Phoneshow{
+    display: block;
+  }
+}
+
+
+
 #ArticleHomePage{
     width: 100%;
     min-height: 900px;
