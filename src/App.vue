@@ -77,39 +77,36 @@ body{
   font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
 }
 .el-header {
-    width: 100%;
     padding-left:100px;
-/*    color: #333;*/
     text-align: center;
     line-height: 60px;
-/*    background-color: #9caebf; */
   }
 .el-footer {
     color: #333;
     text-align: center;
-    line-height: 60px;
+    line-height: 1em;
 /*    background-color: #9caebf; */
   }
   .el-main {
     overflow:hidden;
     height: auto;
-    padding-left:100px;
-    padding-right:100px;
-    margin:10px;
+    padding-left:1em;
+    padding-right:1em;
+    margin:1em;
   }
   
   body > .el-container {
-    margin-bottom: 20px;
+    margin-bottom: 1em;
     background-color: #636b6f;
   }
   
   .el-container:nth-child(5) .el-aside,
   .el-container:nth-child(6) .el-aside {
-    line-height: 260px;
+    line-height: 1em;
   }
   
   .el-container:nth-child(7) .el-aside {
-    line-height: 320px;
+    line-height: 1em;
   }
 
 .v-enter{

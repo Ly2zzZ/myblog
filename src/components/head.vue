@@ -33,9 +33,10 @@
 
   </el-menu>
     </div>
-    <li class="el-icon-arrow-right folder" 
+    <li class="el-icon-arrow-right folder " 
     v-on:click="ishow=ishow==true?false:true"></li>
     <transition name="bounce">
+
     <div class="Phoneshow" v-if="gishow">
       <div class="folder-in" v-on:click="ishow=ishow==true?false:true"></div>
     <el-radio-group v-model="isCollapse"  style="margin-bottom: 20px;">
@@ -99,7 +100,7 @@
     name:'myHuide',
     data() {
       return {
-        ishow:true,
+        ishow:false,
         isCollapse: true,
         activeIndex: '1',
         catelist:[],
@@ -108,7 +109,6 @@
     },
     computed:{
       gishow:function(){
-        console.log(this.ishow)
         return this.ishow;
       }
     },
