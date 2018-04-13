@@ -33,13 +33,22 @@
 
   </el-menu>
     </div>
-    <div class="Phoneshow">
+    <li class="el-icon-arrow-right folder" 
+    v-on:click="ishow=ishow==true?false:true"></li>
+    <transition name="bounce">
+    <div class="Phoneshow" v-if="gishow">
+      <div class="folder-in" v-on:click="ishow=ishow==true?false:true"></div>
     <el-radio-group v-model="isCollapse"  style="margin-bottom: 20px;">
-      <el-radio-button :label="false">展开</el-radio-button>
-      <el-radio-button :label="true">收起</el-radio-button>
+<!--       <el-radio-button :label="false">展开</el-radio-button>
+      <el-radio-button :label="true">收起</el-radio-button> -->
     </el-radio-group>
 
-     <el-menu class="el-menu-vertical-demo" router @open="handleOpen" @close="handleClose" :collapse="isCollapse">
+     <el-menu class="el-menu-vertical-demo" router  :collapse="isCollapse">
+
+        <i class="el-icon-circle-close-outline" 
+        v-on:click="ishow=ishow==true?false:true"
+        style="cursor:pointer" 
+        ></i>
 
       <el-menu-item index="/">
         <i class="el-icon-setting"></i>
@@ -47,9 +56,14 @@
       </el-menu-item>
 
       <el-menu-item index="/articleAll">
-        <i class="el-icon-setting"></i>
+        <i class="el-icon-document"></i>
         <span slot="title">Articles</span>
       </el-menu-item>
+
+      <el-menu-item index="/message">
+         <i class="el-icon-message"></i>
+        <span slot="title">LeaveMessage</span>
+     </el-menu-item>
 
       <el-submenu index="2">
         <template slot="title">
@@ -75,8 +89,8 @@
         <span slot="title">导航四</span>
       </el-menu-item> -->
     </el-menu>
-
     </div>
+  </transition>
   </div>
 </template>
 
@@ -85,11 +99,18 @@
     name:'myHuide',
     data() {
       return {
+        ishow:true,
         isCollapse: true,
         activeIndex: '1',
         catelist:[],
         textarea: ''
       };
+    },
+    computed:{
+      gishow:function(){
+        console.log(this.ishow)
+        return this.ishow;
+      }
     },
     methods: {
       handleSelect(key, keyPath) {
@@ -138,6 +159,14 @@
 </script>
 
 <style scoped>
+.folder{
+  width: 50px;
+  height: 50px;
+  position: fixed;
+  left: 0px;
+  top: 50%;
+  cursor: pointer;
+}
 el-menu{
   width: 100%;
 }
@@ -148,12 +177,30 @@ el-menu{
 .Phoneshow{
   position: fixed;
   left: 0px;
+  top: 50%;
   width: 30%;
   z-index: 1;
+  transform: translate(0,-50%);
 }
 
 .el-menu-vertical-demo:not(.el-menu--collapse) {
     width: 100%;
     min-height:100%;
   }
+
+
+.bounce-enter-active {
+  animation: bounce-in .2s;
+}
+.bounce-leave-active {
+  animation: bounce-in .2s reverse;
+}
+@keyframes bounce-in{
+  from {
+    left: -20px;
+  }
+  to{
+    left: 0px;
+  }
+}
 </style>
