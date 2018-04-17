@@ -3,6 +3,20 @@
     <div class="PCshow">
       <el-menu :default-active="activeIndex" router class="el-menu-demo" mode="horizontal" @select="handleSelect" >
       <span style="font-weight: lighter; font-size: 30px;font-weight: lighter; color:black">欢迎来到米奇妙妙污</span>
+
+        <div class="head-nav">
+          <ul class="nav-list">
+            <li> {{ username }}</li>
+            <li v-if="username!== ''" class="nav-pile">|</li>
+            <li v-if="username!== ''" @click="quit">退出</li>
+            <li v-if="username=== ''" @click="logClick">登录</li>
+            <li class="nav-pile">|</li>
+            <li v-if="username=== ''" @click="regClick">注册</li>
+            <li v-if="username=== ''" class="nav-pile">|</li>
+            <li @click="aboutClick">关于</li>
+          </ul>
+        </div> 
+
     <el-menu-item index="/">Home</el-menu-item>
 
     <el-menu-item index="/articleAll">
@@ -202,5 +216,19 @@ el-menu{
   to{
     left: 0px;
   }
+}
+
+.head-nav {
+  float: right;
+}
+.head-nav ul {
+  overflow: hidden;
+}
+.head-nav li {
+  cursor: pointer;
+  float: left;
+}
+.nav-pile {
+  padding: 0 10px;
 }
 </style>

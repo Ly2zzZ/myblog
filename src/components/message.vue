@@ -8,24 +8,23 @@
 		  v-model="textarea.content">
 		</el-input>
 
-		<div>
 		<div id="inputname">
-		 <el-input
+		 <input
+     id="nameinput"
 		  type="textarea"
 		  :rows="1"
 		  placeholder="尊姓大名?"
 		  v-model="textarea.name">
-		</el-input>
+		</input>
+
+    <el-button style="display: inline-block; height: 3em;width:30%;" 
+    @click="Addcommits()">
+       添加留言
+      </el-button>
 		</div>
-
-		<el-button style="height:100%;margin:0px;" 
-		@click="Addcommits()">
-	  	 添加留言
-	  	</el-button>
 	  	</div>
-  	</div>
 
-
+<div id="mainmessage">
 	<template v-for="(item,index) in content">
 	<el-card class="box-card">
   	<div slot="header" class="clearfix">
@@ -45,23 +44,20 @@
 
 	</el-card>
 	</template>
+</div>
 
 <el-dialog title="回复Ta:" :visible.sync="dialogFormVisible">
   <el-form>
+      <el-input v-model="reply.name" placeholder="你叫啥"></el-input>
 
-    <el-form-item label="你叫啥" :label-width="formLabelWidth">
-      <el-input v-model="reply.name" placeholder="请输入内容"></el-input>
-    </el-form-item>
-
-    <el-form-item label="说点什么吧" :label-width="formLabelWidth">
 		<el-input v-model="reply.content" type="textarea" :rows="4"
-		  placeholder="请输入内容"></el-input>
-    </el-form-item>
+		  placeholder="说点什么吧"></el-input>
+
   </el-form>
 
   <div slot="footer" class="dialog-footer">
-    <el-button @click="dialogFormVisible = false">取 消</el-button>
-    <el-button type="primary" @click="addreply">确 定</el-button>
+    <el-button class="rebutton" @click="dialogFormVisible = false">取 消</el-button>
+    <el-button class="rebutton" type="primary" @click="addreply">确 定</el-button>
   </div>
 </el-dialog>
 
@@ -108,6 +104,7 @@ export default {
         });
       },
   	Addcommits (){
+      console.log(this.textarea.name,this.textarea.content)
 		//console.log("对象", this.textarea)
 		this.contents.push({"name":this.textarea.name,"content":this.textarea.content,"reply":[]})
 
@@ -186,26 +183,38 @@ export default {
 
 
 <style scoped>
-#inputname{
-	margin-top: 10px;
-	display:inline-block;
-	width: 20%;
+#mainmessage{
+  display: flex;
+  flex-wrap:wrap;
+  width: 100%;
 }
+#inputname{
+  margin-top: 1em;
+}
+#nameinput{
+    border-radius: 4px;
+    display: inline-block;
+   width: 60%;
+   height: 3em;
+    border: 1px solid #dcdfe6;
+    color: #606266;
+    background-color: #fff;
+    background-image: none;
+    margin-right: 1em;
+}
+
 #messagebox{
 	width: 100%;
-	margin:10px;
 }
 .el-card{
-	margin-bottom: 10px;
-	margin-top: 10px;
-	margin-right: 10px;
-	display:inline-block;
+	margin-bottom: 1em;
+	margin-top: 1em;
+	margin-right: 1em;
 	background-color: #fdfdfd;
-	float: none;
 	vertical-align: top;
 }
 .text {
-    font-size: 14px;
+    font-size: 1em;
   }
 
   .item {
@@ -222,11 +231,18 @@ export default {
   }
 
   .box-card {
-    width: auto;
     height: auto;
-    min-width: 250px;
-    min-height: 50px;
+    width: 250px;
+    width: 250px;
   }
+.el-dialog__footer {
+    padding: 0px;
+    padding-bottom: 10px;
+  }
+.rebutton{
+  display: inline-block;
+  width: 30%;
+}
 </style>
 
 
