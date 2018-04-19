@@ -75,6 +75,7 @@ export default {
   border: 2px solid #464068;
   padding: 2%;
   line-height: 1.6;
+  overflow: hidden;
 }
 .dialog-close {
   position: absolute;

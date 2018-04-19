@@ -4,9 +4,10 @@
       <div class="g-form-line">
         <span class="g-form-label">用户名：</span>
         <div class="g-form-input">
-          <input type="text" 
-          v-model="usernameModel" placeholder="请输入用户名">
+          <input type="email" 
+          v-model="useridModel" placeholder="请输入登陆账号(邮箱)">
         </div>
+
         <span class="g-form-error">{{ userErrors.errorText }}</span>
       </div>
       <div class="g-form-line">
@@ -20,9 +21,9 @@
       <div class="g-form-line">
         <div class="g-form-btn">
           <a class="button" @click="onLogin">登录</a>
+          <p style="display: inline-block;margin-left:1em;color: red;">{{ errorText }}</p>
         </div>
       </div>
-      <p>{{ errorText }}</p>
     </div>
   </div>
 </template>
@@ -31,7 +32,7 @@
 export default {
   data () {
     return {
-      usernameModel: '',
+      useridModel: '',
       passwordModel: '',
       errorText: ''
     }
@@ -39,9 +40,10 @@ export default {
   computed: {
     userErrors () {
       let errorText, status
-      if (!/@/g.test(this.usernameModel)) {
+
+      if (!/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/g.test(this.useridModel)) {
         status = false
-        errorText = '不包含@'
+        errorText = '请输入正确邮箱'
       }
       else {
         status = true
@@ -58,9 +60,9 @@ export default {
     },
     passwordErrors () {
       let errorText, status
-      if (!/^\w{1,6}$/g.test(this.passwordModel)) {
+      if (/^[a-zA-Z0-9]{1,6}$/g.test(this.passwordModel)) {
         status = false
-        errorText = '密码不是1-6位'
+        errorText = '请输入六位以上密码'
       }
       else {
         status = true
@@ -82,13 +84,19 @@ export default {
         this.errorText = '部分选项未通过'
       }
       else {
-        this.errorText = ''
-        this.$http.get('api/login')
-        .then((res) => {
-          this.$emit('has-log', res.data)
-        }, (error) => {
-          console.log(error)
-        })
+        console.log(this.useridModel,this.passwordModel)
+        this.$ajax.post('/api/log', {
+        params: {
+          id: this.useridModel,
+          password:this.passwordModel
+        }
+      })
+      .then((response)=>{
+        console.log(response)
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
       }
     }
   }
