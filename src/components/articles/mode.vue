@@ -103,12 +103,12 @@ export default {
 		})*/
 	},
 	beforeCreate:function(){
-		      this.$http.get('/api/getArticles')
+	this.$http.get('/api/getArticles')
       .then((ress) => {
       	var res;
       	if (Object.prototype.toString.call(ress.data)=='[object Array]')
           res=ress.data;
-      else res=ress.data.data;
+      	else res=ress.data.data;
        res.sort(this.com);
 
         this.$store.dispatch('getArticlesAction',res.slice(0,res.length))

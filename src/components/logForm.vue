@@ -79,12 +79,18 @@ export default {
     }
   },
   methods: {
+     Notify(inf) {
+        const h = this.$createElement;
+        this.$notify({
+          title: '消息通知',
+          message: h('i', { style: 'color: teal'}, inf)
+        });
+      },
     onLogin () {
       if (!this.userErrors.status || !this.passwordErrors.status) {
         this.errorText = '部分选项未通过'
       }
       else {
-        console.log(this.useridModel,this.passwordModel)
         this.$ajax.post('/api/log', {
         params: {
           id: this.useridModel,
@@ -92,7 +98,15 @@ export default {
         }
       })
       .then((response)=>{
-        console.log(response)
+        if (response.data.code==100){
+          this.Notify("登陆成功! 嘻嘻");
+          document.cookie="username="+response.data.name;
+          this.$emit('has-log', response.data.name)
+        }
+        else if (response.data.code==101)
+        {
+           this.Notify("密码错误....哦或")
+        }
       })
       .catch(function (error) {
         console.log(error);

@@ -22,7 +22,8 @@ let store = new Vuex.Store({
 	state:{
 		NowCate:'',
 		getArticles:[],
-		articledetails:[]
+		articledetails:[],
+		username:''
 	},
 	getters:{
 		getAim (state) {
@@ -33,6 +34,9 @@ let store = new Vuex.Store({
 		},
 		getarticledetails (state){
 			return state.getArticles
+		},
+		getusername (state){
+			return state.username
 		}
 	},
 	mutations:{
@@ -41,6 +45,9 @@ let store = new Vuex.Store({
 		},
 		getArticlesMutation(state,aim){
 			state.getArticles = aim
+		},
+		getusernameMutation(state,aim){
+			state.username = aim
 		}
 	},
 	actions:{
@@ -49,6 +56,9 @@ let store = new Vuex.Store({
 		},
 		getArticlesAction(context,aim) {
 			context.commit('getArticlesMutation',aim)
+		},
+		getusernameAction(context,aim) {
+			context.commit('getusernameMutation',aim)
 		}
 	}
 })

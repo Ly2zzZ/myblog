@@ -5,15 +5,15 @@
       <el-header>
         <my-head></my-head>
 
-          <div class="head-nav">
+          <div class="head-nav" v-if="">
           <ul class="nav-list">
-            <li> {{ username }}</li>
-            <li v-if="username!== ''" class="nav-pile">|</li>
-            <li v-if="username!== ''" @click="quit">退出</li>
-            <li v-if="username=== ''" @click="logClick">登录</li>
+            <li> {{ logname }}</li>
+            <li v-if="logname!== ''" class="nav-pile">|</li>
+            <li v-if="logname!== ''" @click="quit">退出</li>
+            <li v-if="logname=== ''" @click="logClick">登录</li>
             <li class="nav-pile">|</li>
-            <li v-if="username=== ''" @click="regClick">注册</li>
-            <li v-if="username=== ''" class="nav-pile">|</li>
+            <li v-if="logname=== ''" @click="regClick">注册</li>
+            <li v-if="logname=== ''" class="nav-pile">|</li>
             <li @click="aboutClick">关于</li>
           </ul>
         </div> 
@@ -73,7 +73,15 @@ export default {
         username: ''
     }
   },
+  computed:{
+    logname (){
+      return this.username;
+    }
+  },
   methods:{
+    quit(){
+      this.username='';
+    },
     logClick () {
       this.isShowLogDialog = true
     },
@@ -86,7 +94,7 @@ export default {
     onSuccessLog (data) {
       console.log(data)
       this.closeDialog ('isShowLogDialog')
-      this.username = data.username
+      this.username = data
     },
     aboutClick () {
       this.isShowAboutDialog = true
@@ -94,7 +102,26 @@ export default {
   },
   created: function () {
     Draw();
-    //console.log("created");
+
+    var x = document.cookie;
+    x=x.split("; ")
+    x=x.map(function(item){
+      return item.split("=")
+    })
+
+    var t;
+    x.forEach(function(item){
+      if (item[0]=="username")
+      {
+        t=item[1];
+      }
+    })
+
+    this.username=t;
+    this.$store.dispatch('getusernameAction',t);
+  },
+  mounted:function() {
+
   },
   watch:{
     $route(to,from){

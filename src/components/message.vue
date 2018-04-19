@@ -9,13 +9,13 @@
 		</el-input>
 
 		<div id="inputname">
-		 <input
+<!-- 		 <input
      id="nameinput"
 		  type="textarea"
 		  :rows="1"
 		  placeholder="尊姓大名?"
 		  v-model="textarea.name">
-		</input>
+		</input> -->
 
     <el-button style="display: inline-block; height: 3em;width:30%;" 
     @click="Addcommits()">
@@ -48,8 +48,7 @@
 
 <el-dialog title="回复Ta:" :visible.sync="dialogFormVisible">
   <el-form>
-      <el-input v-model="reply.name" placeholder="你叫啥"></el-input>
-
+<!--       <el-input v-model="reply.name" placeholder="你叫啥"></el-input> -->
 		<el-input v-model="reply.content" type="textarea" :rows="4"
 		  placeholder="说点什么吧"></el-input>
 
@@ -104,6 +103,7 @@ export default {
         });
       },
   	Addcommits (){
+      this.textarea.name=this.$store.getters.getusername
       console.log(this.textarea.name,this.textarea.content)
 		//console.log("对象", this.textarea)
 		this.contents.push({"name":this.textarea.name,"content":this.textarea.content,"reply":[]})
@@ -134,6 +134,8 @@ export default {
   		this.dialogFormVisible = true;
   	},
   	addreply(){
+      this.reply.name=this.$store.getters.getusername;
+
   		this.dialogFormVisible = false;
   		//console.log(this.contents[this.replyNow])
   		//console.log(this.reply)

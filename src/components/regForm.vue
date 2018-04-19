@@ -111,6 +111,13 @@ export default {
     }
   },
   methods: {
+    Notify(inf) {
+        const h = this.$createElement;
+        this.$notify({
+          title: '消息通知',
+          message: h('i', { style: 'color: teal'}, inf)
+        });
+      },
     onLogin () {
       if (!this.userErrors.status || !this.passwordErrors.status || !this.usernameErrors.status) {
         this.errorText = '部分选项未通过'
@@ -125,7 +132,13 @@ export default {
         }
       })
       .then((response)=>{
-        console.log(response)
+        console.log(response.data)
+        if (response.data=="successful!!"){
+            this.Notify("注册成功! 嘻嘻");
+        }else if (response.data.errno==1062){
+          this.errorText="该邮箱注册过了哦";
+            this.Notify("该邮箱注册过了哦");
+        }
       })
       .catch(function (error) {
         console.log(error);
