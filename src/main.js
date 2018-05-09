@@ -6,6 +6,7 @@ import Vuex from 'vuex'
 import VueResource from 'vue-resource'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
+
 import axios from 'axios' 
 
 import App from './App'
@@ -14,6 +15,7 @@ Vue.prototype.$ajax = axios
 Vue.use(Vuex)
 Vue.use(VueResource)
 Vue.use(ElementUI)
+
 Vue.config.productionTip = false
 
 var bus=new Vue()

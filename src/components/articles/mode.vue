@@ -31,7 +31,7 @@ export default {
 			temp:'<p>哦豁 未成功加载文章</p>',
 			articleid:0,
 			details:"啥都没有",
-			constyle:{}
+			editorOption:{}
 		}
 	},
 	computed:{
@@ -83,13 +83,21 @@ export default {
 		  })
 		  .then((response)=>{
 		  	//console.log(response.data)
-		  	//this.temp=response.data.data.content
-		  	this.temp=response.data[0].content
+		  	if (response.data.data.content==undefined)
+		  		this.temp=response.data[0].content
+		  	else 
+		  		this.temp=response.data.data.content
 		  })
 		  .catch(function (error) {
 		    console.log(error);
 		  });
-		}
+		},
+		onEditorBlur(){//失去焦点事件
+        },
+        onEditorFocus(){//获得焦点事件
+        },
+        onEditorChange(){//内容改变事件
+        }
 	},
 	created:function (){
 		for (let i=0;i<this.$store.getters.getArticles.length;i++)
@@ -147,7 +155,7 @@ a:hover{
     display: inline-block;
     text-align: justify;
     width: 70%;
-    line-height: 30px;
+/*    line-height: 30px;*/
     font-family: Lato,PingFang SC,Microsoft YaHei,sans-serif;
 }
 </style>

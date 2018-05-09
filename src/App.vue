@@ -117,6 +117,9 @@ export default {
       }
     })
 
+    if (t==undefined)
+        t="吃瓜游客"
+
     this.username=t;
     this.$store.dispatch('getusernameAction',t);
   },

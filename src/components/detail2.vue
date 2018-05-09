@@ -69,9 +69,9 @@ export default {
     methods:{
       com(ob1,ob2)
       {
-        if (ob1.date>ob2.date)
+        if (new Date(ob1.date)>new Date(ob2.date))
           return -1;
-        else if(ob1.date<ob2.date)
+        else if(new Date(ob1.date)<new Date(ob2.date))
           return 1;
         else return 0;
       }
