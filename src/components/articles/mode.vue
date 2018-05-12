@@ -160,13 +160,50 @@ export default {
 			this.ifedit=false;
 	},
 	getUEContent() {
-/*        let content = this.$refs.ue.getUEContent();
-    this.$notify({
-      title: '获取成功，可在控制台查看！',
-      message: content,
-      type: 'success'
-    });
-    console.log(content)*/
+		var that=this;
+		Date.prototype.format = function(fmt) { 
+		     var o = { 
+		        "M+" : this.getMonth()+1,                 //月份 
+		        "d+" : this.getDate(),                    //日 
+		        "h+" : this.getHours(),                   //小时 
+		        "m+" : this.getMinutes(),                 //分 
+		        "s+" : this.getSeconds(),                 //秒 
+		        "q+" : Math.floor((this.getMonth()+3)/3), //季度 
+		        "S"  : this.getMilliseconds()             //毫秒 
+		    }; 
+		    if(/(y+)/.test(fmt)) {
+		            fmt=fmt.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length)); 
+		    }
+		     for(var k in o) {
+		        if(new RegExp("("+ k +")").test(fmt)){
+		             fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));
+		         }
+		     }
+		    return fmt; 
+		}        
+
+        let content = this.$refs.ue.getUEContent();
+        let id=this.$route.params.artcileid
+         this.$ajax.post('/api/changearticle', {
+          params: {
+          	id:id,
+            content:content,
+            date: new Date().format("yyyy-MM-dd")
+          }
+        })
+        .then((response)=>{
+	        that.$notify({
+		      title: '修改成功',
+		      type: 'success'
+		    });
+        })
+        .catch(function (error) {
+        	that.$notify({
+		      title: '修改失败',
+		      type: 'error'
+		    });
+        });
+
     },
     com(ob1,ob2)
     {
