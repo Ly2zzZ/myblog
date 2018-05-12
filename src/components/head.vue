@@ -133,7 +133,7 @@
       }
     },
     beforeCreate: function (){
-      this.$http.get('/api/getArticles')
+      this.$ajax.get('/api/getArticles')
       .then((ress) => {
        // console.log(ress.data)
       // let res=ress.data.data;

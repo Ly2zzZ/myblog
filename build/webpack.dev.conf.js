@@ -14,6 +14,7 @@ var appData = require('../db.json')//加载本地数据文件
 console.log(appData.articledetails[1]);
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const devWebpackConfig = merge(baseWebpackConfig, {
   module: {
@@ -27,7 +28,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
 
   // these devServer options should be customized in /config/index.js
   devServer: {
-        before(app) {
+/*        before(app) {
       app.get('/api/getArticles', (req, res) => {
         res.json({
           errno: 0,
@@ -54,7 +55,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
           data: appData.commits
         })//接口返回json数据，上面配置的数据seller就赋值给data请求后调用
       })
-    },
+    },*/
     clientLogLevel: 'warning',
     historyApiFallback: {
       rewrites: [
@@ -79,6 +80,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     disableHostCheck: true*/
   },
   plugins: [
+   new BundleAnalyzerPlugin(),
     new webpack.DefinePlugin({
       'process.env': require('../config/dev.env')
     }),

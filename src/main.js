@@ -3,18 +3,48 @@
 import Vue from 'vue'
 import router from './router'
 import Vuex from 'vuex'
-import VueResource from 'vue-resource'
-import ElementUI from 'element-ui';
-import 'element-ui/lib/theme-chalk/index.css';
+/*import ElementUI from 'element-ui';*/
+/*import 'element-ui/lib/theme-chalk/index.css';*/
+
+import '../static/UE/ueditor.config.js'
+import '../static/UE/ueditor.all.min.js'
+import '../static/UE/lang/zh-cn/zh-cn.js'
+import '../static/UE/ueditor.parse.min.js'
 
 import axios from 'axios' 
-
 import App from './App'
+
+import { Button,
+		 Input,
+		 Pagination,
+		 Container,
+		 Header,
+		 Main,
+		 Footer,
+		 Menu,
+		 MenuItem, 
+		 Submenu,
+		 dialog,
+		 card,
+		 Notification
+		 
+		  } from 'element-ui'
+Vue.use(Button)
+Vue.use(Input)
+Vue.use(Pagination)
+Vue.use(Container)
+Vue.use(Menu)
+Vue.use(Submenu)
+Vue.use(MenuItem)
+Vue.use(Header)
+Vue.use(Main)
+Vue.use(Footer)
+Vue.use(dialog)
+Vue.use(card)
+Vue.prototype.$notify = Notification
 
 Vue.prototype.$ajax = axios
 Vue.use(Vuex)
-Vue.use(VueResource)
-Vue.use(ElementUI)
 
 Vue.config.productionTip = false
 

@@ -1,6 +1,7 @@
 <template>
   <div id="ArticleHomePage">
-     <template v-for="item in showpage">
+    <div>
+        <template v-for="item in showpage">
         <div id='EachArticle' :class=item.cate>
         <router-link  
         :to="{path: '/article/'+item.id }" 
@@ -23,6 +24,8 @@
         </span>
         </div>
       </template>
+    </div>
+
   </div>
 </template>
 

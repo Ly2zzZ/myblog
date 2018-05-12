@@ -26,7 +26,7 @@
          </keep-alive>
       </transition>
 
-        </el-main>
+      </el-main>
       <el-footer>
         ShuaiBiYu Studying
       </el-footer>
@@ -101,7 +101,7 @@ export default {
     }
   },
   created: function () {
-    Draw();
+   // Draw();
 
     var x = document.cookie;
     x=x.split("; ")
@@ -131,6 +131,16 @@ export default {
       if (this.$route.params==undefined)
         Draw();
     }
+  },
+  mounted (){
+/*    this.$ajax.get('http://www.shuaibiyu.cn/api/getArticles')
+      .then((response)=>{
+        console.log(response)
+      })
+      .catch(function (error) {
+        this.Notify("评论失败...")
+        console.log(error);
+      });*/
   }
 }
 </script>
@@ -220,9 +230,9 @@ body{
 
 
 .head-nav {
-  float: right;
-  position: absolute;
-  top:0px;
+/*  float: right;*/
+  position: fixed;
+  top:-1.5em;
   right: 1em;
   font-size: 1em;
 }

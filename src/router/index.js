@@ -1,13 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import IndexPage from '../components/Index'
+/*import IndexPage from '../components/Index'
 
 import details from '../components/details'
 import Categories from '../components/detail1'
 import All from '../components/detail2'
 import articlemode from '../components/articles/mode'
-import message from '../components/message'
+import message from '../components/message'*/
 Vue.use(Router)
 
 export default new Router({
@@ -15,27 +15,27 @@ export default new Router({
   routes: [
     {
       path: '/',
-      component: IndexPage,
+      component: resolve => require(['../components/Index'], resolve)
     },
     {
       path:'/articleAll',
-      component:All
+      component: resolve => require(['../components/detail2'], resolve)
     },
     {
       path:'/message',
-      component:message
+      component: resolve => require(['../components/message'], resolve)
     },
     {
         path:'/Categories/:cate',
-        component:Categories
+        component: resolve => require(['../components/detail1'], resolve)
     },
     {
     	path:'/article',
-      component:details,
+      component: resolve => require(['../components/details'], resolve),
     	children:[
       {
         path:':artcileid',
-        component:articlemode
+        component: resolve => require(['../components/articles/mode'], resolve)
       }
     	]
     	

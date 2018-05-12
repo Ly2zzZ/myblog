@@ -236,6 +236,9 @@ export default {
     height: auto;
     width: 250px;
     width: 250px;
+    span{
+      margin: 0;
+    }
   }
 .el-dialog__footer {
     padding: 0px;
