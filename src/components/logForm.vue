@@ -41,7 +41,12 @@ export default {
     userErrors () {
       let errorText, status
 
-      if (!/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/g.test(this.useridModel)) {
+      if (this.useridModel=='admin')
+      {
+        status = true
+        errorText = ''
+      }
+      else if (!/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/g.test(this.useridModel)) {
         status = false
         errorText = '请输入正确邮箱'
       }
@@ -60,7 +65,13 @@ export default {
     },
     passwordErrors () {
       let errorText, status
-      if (/^[a-zA-Z0-9]{1,6}$/g.test(this.passwordModel)) {
+
+      if (this.passwordModel=='admin')
+      {
+        status = true
+        errorText = ''
+      }
+      else if (/^[a-zA-Z0-9]{1,6}$/g.test(this.passwordModel)) {
         status = false
         errorText = '请输入六位以上密码'
       }
@@ -100,7 +111,11 @@ export default {
       .then((response)=>{
         if (response.data.code==100){
           this.Notify("登陆成功! 嘻嘻");
-          document.cookie="username="+response.data.name;
+          
+          location.reload();
+          this.setCookie('username',response.data.name,1)
+          this.setCookie('userid',response.data.id,1)
+          this.$store.dispatch('getusernameAction',response.data);
           this.$emit('has-log', response.data.name)
         }
         else if (response.data.code==101)

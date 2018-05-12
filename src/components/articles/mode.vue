@@ -1,7 +1,8 @@
 <template>
 	<div id="artmode">
 		<div>
-			<h2 >{{titles.title}} <i class="el-icon-edit-outline" @click="showEdit()" style="cursor: pointer"></i></h2>
+			<h2 >{{titles.title}} <i class="el-icon-edit-outline" @click="showEdit()"
+			 v-bind:class="{ editable: getifeditable, uneditable: !getifeditable }"></i></h2>
 			<span>
 				<i class="el-icon-date"></i> 
 				发表于 {{titles.date}}
@@ -77,6 +78,7 @@ export default {
 	},
 	data(){
 		return {
+			iseditable:false,
 			commits:[
 			{
 				name:"刘磊",
@@ -108,6 +110,10 @@ export default {
 		}
 	},
 	computed:{
+		getifeditable(){
+
+			return this.iseditable;
+		},
 		titles:function(){
 			return this.details
 		},
@@ -145,7 +151,16 @@ export default {
 				});
 			}
 			else{
-				this.textarea.name=this.$store.getters.getusername;
+			if (this.$store.getters.getusername.name==undefined)
+			   {
+			      let t=this.getCookie('username');
+			      let tt=this.getCookie('userid');
+			      this.textarea.name=t;
+			      this.$store.dispatch('getusernameAction',{"username":t,'"userid':tt});
+			   }
+			   else{
+			    this.textarea.name=this.$store.getters.getusername.name
+			   }
 				this.commits.push(this.textarea)
 				this.$notify({
 					title: '评论成功',
@@ -154,6 +169,8 @@ export default {
 			}
 		},
 	showEdit(){
+		if (this.iseditable==false)
+			return;
 		if(this.ifedit==false)
 			this.ifedit=true;
 		else
@@ -196,6 +213,8 @@ export default {
 		      title: '修改成功',
 		      type: 'success'
 		    });
+	     this.showEdit();
+
         })
         .catch(function (error) {
         	that.$notify({
@@ -279,6 +298,18 @@ export default {
 		}),(err) => {
 			console.log(err)
 		}
+	},
+	mounted(){
+		let confirm;
+		if (this.$store.getters.getusername.name==undefined)
+	     {
+	         confirm=this.getCookie('userid');
+	     }
+	     else{
+	      confirm=this.$store.getters.getusername.name
+	     }
+	     if (confirm=='admin')
+	     	this.iseditable=true;
 	}
 }
 
@@ -368,6 +399,13 @@ a:hover{
 	background: #f0f0f0;
 	text-align: center;
 	opacity: .5;
+}
+
+.editable{
+	cursor: pointer;
+}
+.uneditable{
+	cursor: not-allowed;
 }
 
 </style>

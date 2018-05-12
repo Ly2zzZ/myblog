@@ -81,6 +81,10 @@ export default {
   methods:{
     quit(){
       this.username='';
+      this.$store.dispatch('getusernameAction',{});
+      this.setCookie('username','',1)
+      this.setCookie('userid','',1)
+      location.reload();
     },
     logClick () {
       this.isShowLogDialog = true
@@ -102,26 +106,17 @@ export default {
   },
   created: function () {
    // Draw();
+   if (this.$store.getters.getusername.name==undefined)
+   {
+      let t=this.getCookie('username');
+      let tt=this.getCookie('userid');
+      this.username=t;
+      this.$store.dispatch('getusernameAction',{"username":t,'"userid':tt});
+   }
+   else{
+    this.username=this.$store.getters.getusername.name
+   }
 
-    var x = document.cookie;
-    x=x.split("; ")
-    x=x.map(function(item){
-      return item.split("=")
-    })
-
-    var t;
-    x.forEach(function(item){
-      if (item[0]=="username")
-      {
-        t=item[1];
-      }
-    })
-
-    if (t==undefined)
-        t="吃瓜游客"
-
-    this.username=t;
-    this.$store.dispatch('getusernameAction',t);
   },
   mounted:function() {
 

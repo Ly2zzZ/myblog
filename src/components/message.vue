@@ -17,7 +17,7 @@
 		  v-model="textarea.name">
 		</input> -->
 
-    <el-button style="display: inline-block; height: 3em;width:30%;" 
+    <el-button style="display: inline-block; height: 3em;width:10%;float:right" 
     @click="Addcommits()">
        添加留言
       </el-button>
@@ -103,9 +103,18 @@ export default {
         });
       },
   	Addcommits (){
-      this.textarea.name=this.$store.getters.getusername
-      console.log(this.textarea.name,this.textarea.content)
-		//console.log("对象", this.textarea)
+      if (this.$store.getters.getusername.name==undefined)
+     {
+        let t=this.getCookie('username');
+        let tt=this.getCookie('userid');
+        this.textarea.name=t;
+        this.$store.dispatch('getusernameAction',{"username":t,'"userid':tt});
+     }
+     else{
+      this.textarea.name=this.$store.getters.getusername.name
+     }
+
+
 		this.contents.push({"name":this.textarea.name,"content":this.textarea.content,"reply":[]})
 
     this.$ajax.get('/api/addcommits', {
@@ -117,6 +126,7 @@ export default {
         }
       })
       .then((response)=>{
+        console.log(response)
         this.commitsOb++;
         this.Notify("评论成功")
         //console.log("successful!!!!!!!!!!!!!!!!!!!")
