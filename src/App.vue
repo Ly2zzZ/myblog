@@ -5,7 +5,7 @@
       <el-header>
         <my-head></my-head>
 
-          <div class="head-nav" v-if="">
+          <div class="head-nav">
           <ul class="nav-list">
             <li> {{ logname }}</li>
             <li v-if="logname!== ''" class="nav-pile">|</li>
@@ -222,11 +222,9 @@ body{
 }
 
 
-
-
 .head-nav {
 /*  float: right;*/
-  position: fixed;
+  position: absolute;
   top:-1.5em;
   right: 1em;
   font-size: 1em;

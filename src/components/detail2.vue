@@ -43,7 +43,8 @@ export default {
     return {
       totalpage:0,
       articles:[],
-      nowpage:1
+      nowpage:1,
+      articlenum:''
     }
   },
   computed:{
@@ -58,11 +59,13 @@ export default {
   created:function(){
      this.$ajax.get('/api/getArticles')
       .then((ress) => {
+
        var res;
        if (Object.prototype.toString.call(ress.data)=='[object Array]')
           res=ress.data;
         else res=ress.data.data;
 
+        this.articlenum=res.length;
        res.sort(this.com);
         this.$store.dispatch('getArticlesAction',res.slice(0,res.length));
 
@@ -80,8 +83,6 @@ export default {
         console.log(err)
       }
 
-      
-
       let ress=this.$store.getters.getArticles.slice(0,this.$store.getters.getArticles.length);
       let len=ress.length;
       // console.log(len)
@@ -91,7 +92,7 @@ export default {
       }
       console.log(this.articles)
       this.totalpage=this.articles.length;
-  },
+    },
     methods:{
       com(ob1,ob2)
       {
@@ -101,10 +102,33 @@ export default {
           return 1;
         else return 0;
       }
-/*        submit () {
-          console.log("1 ed")
-          this.$root.Bus.$emit('xxartchange',"as");
-        }*/
+    },
+    mounted(){
+      var that=this;
+      this.$root.Bus.$on('event1', function (form) {
+        form.id=++that.articlenum;
+
+        this.$ajax.get('/api/addArticle', {
+          params: {
+            title:form.title,
+            cate:form.cate,
+            readnum:form.readnum,
+            liked:form.liked,
+            date:form.date,
+            id:form.id
+          }
+        })
+        .then((response)=>{
+          console.log("asd")
+          location.reload();
+          that.Notify("添加成功")
+
+        })
+        .catch(function (error) {
+          that.Notify("添加失败...");
+        });
+
+      })
     }
 }
 </script>
