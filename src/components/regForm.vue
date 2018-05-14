@@ -122,27 +122,11 @@ export default {
       if (!this.userErrors.status || !this.passwordErrors.status || !this.usernameErrors.status) {
         this.errorText = '部分选项未通过'
       }
-      else {
-/*        console.log(this.useridModel,this.passwordModel,this.usernameModel)*/
-        this.$ajax.post('/api/reg', {
-        params: {
-          name:this.usernameModel,
-          id: this.useridModel,
-          password:this.passwordModel
-        }
-      })
-      .then((response)=>{
-        console.log(response.data)
-        if (response.data=="successful!!"){
-            this.Notify("注册成功! 嘻嘻");
-        }else if (response.data.errno==1062){
-          this.errorText="该邮箱注册过了哦";
-            this.Notify("该邮箱注册过了哦");
-        }
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    else {
+        this.setCookie('username',usernameModel,1)
+        this.setCookie('userid',useridModel,1)
+        this.$emit('has-log',usernameModel)
+/*        location.reload();*/
       }
     }
   }

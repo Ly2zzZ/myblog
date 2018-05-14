@@ -112,11 +112,12 @@ export default {
         if (response.data.code==100){
           this.Notify("登陆成功! 嘻嘻");
           
-          location.reload();
           this.setCookie('username',response.data.name,1)
           this.setCookie('userid',response.data.id,1)
           this.$store.dispatch('getusernameAction',response.data);
           this.$emit('has-log', response.data.name)
+
+            location.reload();
         }
         else if (response.data.code==101)
         {

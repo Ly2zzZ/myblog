@@ -118,9 +118,6 @@ export default {
    }
 
   },
-  mounted:function() {
-
-  },
   watch:{
     $route(to,from){
       if (this.$route.params==undefined)

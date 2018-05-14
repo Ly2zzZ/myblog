@@ -49,10 +49,6 @@
 
     <div class="Phoneshow" v-if="gishow">
       <div class="folder-in" v-on:click="ishow=ishow==true?false:true"></div>
-      <el-radio-group v-model="isCollapse"  style="margin-bottom: 20px;">
-        <el-radio-button :label="false">展开</el-radio-button>
-        <el-radio-button :label="true">收起</el-radio-button>
-      </el-radio-group>
 
       <el-menu class="el-menu-vertical-demo" router  :collapse="isCollapse">
 
