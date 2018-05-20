@@ -97,7 +97,7 @@
 
       <el-form-item label="分类至:" class="inline-form inline-form-left">
         <el-select v-model="form.cate" placeholder="请选择分类">
-          <el-option v-for="(item,index) in catelist" :label="item" :value="item"></el-option>
+          <el-option v-for="(item,index) in catelist" :label="item" :value="item" key="index"></el-option>
         </el-select>
       </el-form-item>
 

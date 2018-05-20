@@ -15,10 +15,11 @@ window.requestAnimFrame = ( function() {
 })();
 
 // now we will setup our basic variables for the demo
+console.log(window.innerWidth*0.7,window.innerHeight)
 var canvas = document.getElementById( 'canvasxx' ),
 		ctx = canvas.getContext( '2d' ),
 		// full screen dimensions
-		cw = document.getElementById("homepage").offsetWidth,
+		cw = window.innerWidth*0.7,
 		ch = window.innerHeight,
 		// firework collection
 		fireworks = [],

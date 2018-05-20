@@ -103,6 +103,11 @@ export default {
         });
       },
   	Addcommits (){
+      if (this.textarea.content == "")
+      {
+          this.Notify("请输入内容")
+      }
+
       if (this.$store.getters.getusername.name==undefined)
      {
         let t=this.getCookie('username');
@@ -114,10 +119,13 @@ export default {
       this.textarea.name=this.$store.getters.getusername.name
      }
 
-
+     if (this.textarea.name=="")
+        {
+          this.textarea.name="吃瓜游客";
+        }
 		this.contents.push({"name":this.textarea.name,"content":this.textarea.content,"reply":[]})
 
-    this.$ajax.get('/api/addcommits', {
+/*    this.$ajax.get('/api/addcommits', {
         params: {
           Pid:this.commitsOb,
           name:this.textarea.name,
@@ -134,7 +142,7 @@ export default {
       .catch(function (error) {
         this.Notify("评论失败...")
         console.log(error);
-      });
+      });*/
 
 		//console.log(this.contents)
 	},
@@ -216,7 +224,11 @@ export default {
 }
 
 #messagebox{
-	width: 100%;
+	width: 70%;
+  right: 0;
+  left: 0;
+  margin:auto;
+
 }
 .el-card{
 	margin-bottom: 1em;

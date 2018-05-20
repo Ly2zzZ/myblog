@@ -144,7 +144,6 @@ export default {
 		addcommits(){
 			if (this.textarea.content==' ')
 			{
-				console.log("as")
 				this.$notify({
 					title: '请输入内容',
 					type: 'error'
@@ -161,7 +160,12 @@ export default {
 			   else{
 			    this.textarea.name=this.$store.getters.getusername.name
 			   }
+			   if (this.textarea.name=="")
+			   		this.textarea.name="吃瓜游客";
+
 				this.commits.push(this.textarea)
+
+				
 				this.$notify({
 					title: '评论成功',
 					type: 'sucess'

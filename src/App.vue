@@ -1,10 +1,8 @@
 <template>
-  <div>
-    <el-container>
+  <div id="first_in">
       <el-container>
       <el-header>
         <my-head></my-head>
-
           <div class="head-nav">
           <ul class="nav-list">
             <li> {{ logname }}</li>
@@ -17,10 +15,10 @@
             <li @click="aboutClick">关于</li>
           </ul>
         </div> 
-
       </el-header>
+
       <el-main>
-      <transition mode="out-in">  
+      <transition name="outin">  
         <keep-alive>
            <router-view></router-view>
          </keep-alive>
@@ -43,7 +41,6 @@
       <reg-form></reg-form>
     </my-dialog>
       </el-container>
-    </el-container>
   </div>
 </template>
 
@@ -105,7 +102,6 @@ export default {
     }
   },
   created: function () {
-   // Draw();
    if (this.$store.getters.getusername.name==undefined)
    {
       let t=this.getCookie('username');
@@ -125,6 +121,12 @@ export default {
     }
   },
   mounted (){
+    window.onload = function(){
+       document.getElementById("first_in").style.width="100%";
+       document.getElementById("first_in").style.opacity=1;
+      Draw();
+    }
+
 /*    this.$ajax.get('http://www.shuaibiyu.cn/api/getArticles')
       .then((response)=>{
         console.log(response)
@@ -185,39 +187,38 @@ body{
     margin:1em;
   }
   
-  body > .el-container {
-    margin-bottom: 1em;
-    background-color: #636b6f;
-  }
-  
-  .el-container:nth-child(5) .el-aside,
-  .el-container:nth-child(6) .el-aside {
-    line-height: 1em;
-  }
-  
-  .el-container:nth-child(7) .el-aside {
-    line-height: 1em;
-  }
+body > .el-container {
+  margin-bottom: 1em;
+  background-color: #636b6f;
+}
 
-.v-enter{
+.el-container:nth-child(5) .el-aside,
+.el-container:nth-child(6) .el-aside {
+  line-height: 1em;
+}
+
+.el-container:nth-child(7) .el-aside {
+  line-height: 1em;
+}
+
+.outin-enter{
   opacity: 0;
 }
-.v-enter-active{
+.outin-enter-active{
   transition: 0.5s;
 }
-.v-enter-to{
+.outin-enter-to{
   opacity: 1;
 }
-.v-leave{
+.outin-leave{
   opacity: 1;
 }
-.v-leave-to{
+.outin-leave-to{
   opacity:0;
 }
-.v-leave-active{
+.outin-leave-active{
   transition: 0.5s;
 }
-
 
 .head-nav {
 /*  float: right;*/
@@ -279,4 +280,14 @@ ol, ul {
   color: red;
   padding-left: 15px;
 }
+
+#first_in{
+  transition: width 2s;
+  width:0%;
+  opacity: 0;
+}
+#first_in:hover{
+  width:100%;
+}
+
 </style>

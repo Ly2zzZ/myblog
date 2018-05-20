@@ -1,18 +1,10 @@
 <template>
-  <div id="homepage">  
+  <div id="homepage" style="100%">  
   	<canvas id="canvasxx">Canvas is not supported in your browser.</canvas>
-	<p>测试文字</p>
-	<span>2018-03-08</span>  	 
-	<p>测试文字</p>
-	<span>2018-03-08</span>	
-	<p>测试文字</p>
-	<span>2018-03-08</span>  	
-	<p>测试文字</p>
-	<span>2018-03-08</span>	
-	<p>测试文字</p>
-	<span>2018-03-08</span>   
-	<p>测试文字</p>
-	<span>2018-03-08</span> 
+  	<div class="home_content">
+  		<p>暂时想不出首页放些什么狂拽酷炫的东西</p>
+  		<p>我这么说,你应该懂了吧</p>
+  	</div>
   </div>
 </template>
 
@@ -38,10 +30,10 @@ span{
     margin-bottom: 80px; 
 }
 p{
-	    text-align: center;
+	margin:auto;
+	width:500px;
 }
 #homepage{
-	width: 100%;
 	height: 800px;
 	overflow: hidden;
 	overflow-x: hidden;
@@ -49,5 +41,15 @@ p{
 #canvasxx{
   position:absolute;
   z-index:-1;
+}
+.home_content{
+	width:70%;
+	height:100%;
+	right: 0;
+	left:0;
+	margin: auto;
+	p{
+
+	}
 }
 </style>

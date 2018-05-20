@@ -9,6 +9,8 @@ function resolve (dir) {
 }
 
 
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const webpack = require('webpack');
 
 module.exports = {
   context: path.resolve(__dirname, '../'),
@@ -78,5 +80,19 @@ module.exports = {
     net: 'empty',
     tls: 'empty',
     child_process: 'empty'
-  }
+  },
+  plugins: [
+    new webpack.optimize.CommonsChunkPlugin({
+        name: 'my_vendor',
+        minChunks: function (module) {
+           // 该配置假定你引入的 vendor 存在于 node_modules 目录中
+           return module.context && module.context.indexOf('node_modules') !== -1;
+        }
+    }),
+    //CommonChunksPlugin 将从 vendor和bundles中提取所有的公用库
+    //但由于已经没有其他公用模块了，故而只会将runtime code存入manifest中
+      new webpack.optimize.CommonsChunkPlugin({
+          name: 'my_anifest' 
+      })
+  ]
 }
