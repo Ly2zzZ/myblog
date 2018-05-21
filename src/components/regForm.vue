@@ -31,7 +31,8 @@
       </div>
       <div class="g-form-line">
         <div class="g-form-btn">
-          <a class="button" @click="onLogin">登录</a>
+          <el-button type="success" class="buttton_edit" @click="onLogin()"  plain>登录</el-button>
+          <el-button type="danger" class="buttton_edit" @click="close()"  plain>取消</el-button>
           <p style="display: inline-block;margin-left:1em;color: red;">{{ errorText }}</p>
         </div>
       </div>
@@ -111,6 +112,9 @@ export default {
     }
   },
   methods: {
+     close(){
+      this.$emit('on-close')
+    },
     Notify(inf) {
         const h = this.$createElement;
         this.$notify({

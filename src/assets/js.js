@@ -1,4 +1,4 @@
-export function Draw()
+export function Drawback()
 {
 	//console.log("draw")
 	$(document).ready(function(){
@@ -15,7 +15,8 @@ window.requestAnimFrame = ( function() {
 })();
 
 // now we will setup our basic variables for the demo
-console.log(window.innerWidth*0.7,window.innerHeight)
+if(document.getElementById( 'canvasxx' )==null)
+	return ;
 var canvas = document.getElementById( 'canvasxx' ),
 		ctx = canvas.getContext( '2d' ),
 		// full screen dimensions

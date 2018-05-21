@@ -33,11 +33,11 @@
         </template>
       </el-submenu>
 
-      <el-menu-item index="3" >
+      <el-menu-item index="" >
         <a href="https://github.com/Ly2zzZ" style="text-decoration:none">GitHub</a>
       </el-menu-item>
 
-      <el-menu-item index="4" >
+      <el-menu-item index="" >
         <a href="https://www.zhihu.com/people/jin-yu-69-77-42/activities" style="text-decoration:none">ZhiHu</a>
       </el-menu-item>
 

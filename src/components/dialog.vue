@@ -4,7 +4,6 @@
       <div class="dialog-cover"  v-if="isShow" @click="closeMyself"></div>
       <transition name="drop">
         <div class="dialog-content"  v-if="isShow">
-          <p class="dialog-close" @click="closeMyself">x</p>
           <slot>empty</slot>
         </div>
       </transition>
@@ -63,14 +62,17 @@ export default {
   height: 100%;
 }
 .dialog-content {
-  width: 50%;
+  max-width: 35%;
+  width: auto;
   position: fixed;
-  max-height: 50%;
   overflow: auto;
   background: #fff;
-  top: 20%;
-  left: 50%;
-  margin-left: -25%;
+  
+  top:20%;
+  left: 0;
+  right:0;
+  margin: auto;                    
+
   z-index: 10;
   border: 2px solid #464068;
   padding: 2%;

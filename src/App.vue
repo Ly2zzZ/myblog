@@ -1,5 +1,5 @@
 <template>
-  <div id="first_in">
+  <div id="first_in" class="content">
       <el-container>
       <el-header>
         <my-head></my-head>
@@ -34,19 +34,26 @@
     </my-dialog>
     
     <my-dialog :is-show="isShowLogDialog" @on-close="closeDialog('isShowLogDialog')">
-      <log-form @has-log="onSuccessLog"></log-form>
+      <log-form @has-log="onSuccessLog" @on-close="closeDialog('isShowLogDialog')"></log-form>
     </my-dialog>
 
     <my-dialog :is-show="isShowRegDialog" @on-close="closeDialog('isShowRegDialog')">
-      <reg-form></reg-form>
+      <reg-form @on-close="closeDialog('isShowRegDialog')"></reg-form>
     </my-dialog>
       </el-container>
+
+      <div class="shutter">
+    <div></div>
+    <div></div>
+    <div></div>
+      </div>
   </div>
 </template>
 
 
 <script>
-import { Draw } from './assets/js.js'
+import { donghua } from './assets/donghua.js'
+
 import myHead from './components/head'
 
 import Dialog from './components/dialog'
@@ -116,16 +123,23 @@ export default {
   },
   watch:{
     $route(to,from){
-      if (this.$route.params==undefined)
-        Draw();
+      if (this.$route.path=='/' && from.path!='/' && this.getin==2)
+         {
+          console.log(this.getin)
+          donghua();
+          this.getin=1;
+        }
     }
   },
   mounted (){
+    var that=this;
     window.onload = function(){
-       document.getElementById("first_in").style.width="100%";
-       document.getElementById("first_in").style.opacity=1;
-      Draw();
+        donghua();
+        if (that.$route.path!='/')
+          that.getin=2;
     }
+}
+}
 
 /*    this.$ajax.get('http://www.shuaibiyu.cn/api/getArticles')
       .then((response)=>{
@@ -135,8 +149,6 @@ export default {
         this.Notify("评论失败...")
         console.log(error);
       });*/
-  }
-}
 </script>
 
 
@@ -167,6 +179,9 @@ export default {
 }
 body{
   font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
 }
 .el-header {
     padding-left:100px;
@@ -290,4 +305,67 @@ ol, ul {
   width:100%;
 }
 
+
+
+.shutter {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 20px;
+  height: 20px;
+  margin-left: -10px;
+  margin-top: -10px;
+  transition: all 2s;
+}
+@media (orientation: landscape) {
+.shutter.open {
+  width: 176vw;
+  height: 176vw;
+  margin-left: -88vw;
+  margin-top: -88vw;
+  transform: rotate(180deg);
+}
+}
+@media (orientation: portrait) {
+.shutter.open {
+  width: 176vh;
+  height: 176vh;
+  margin-left: -88vh;
+  margin-top: -88vh;
+  transform: rotate(180deg);
+}
+}
+.shutter > div {
+  position: absolute;
+  width: 100%;
+  height: 57.735026918962575%;
+  top: 21.132486540518713%;
+}
+.shutter > div::before,
+.shutter > div::after {
+  position: absolute;
+  content: '';
+  height: 1000px;
+  width: 2000px;
+  background: #343434;
+  transform: rotate(30deg) skew(30deg);
+}
+.shutter > div::before {
+  bottom: 0;
+  right: 100%;
+  border-right: var(--line-size) solid #000;
+  transform-origin: 100% 100%;
+}
+.shutter > div::after {
+  top: 0;
+  left: 100%;
+  border-left: var(--line-size) solid #000;
+  transform-origin: 0 0;
+}
+.shutter > div:nth-child(2) {
+  transform: rotate(60deg);
+}
+.shutter > div:nth-child(3) {
+  transform: rotate(120deg);
+}
 </style>
