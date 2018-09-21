@@ -209,13 +209,9 @@ var Tips={};
 /*  "use strict";*/
 if (document.getElementById("luoyu_canvas") == null)
     return;
-  var ctx = document.
-  getElementById("luoyu_canvas").
-  getContext("2d"),
-    svg = document.
-  getElementById("luoyu_svg"),
-    paths = svg.
-  querySelectorAll("path"),
+  var ctx = document.getElementById("luoyu_canvas").getContext("2d"),
+    svg = document.getElementById("luoyu_svg"),
+    paths = svg.querySelectorAll("path"),
 
   roughBrushes = [],
   ovalBrushes = [];

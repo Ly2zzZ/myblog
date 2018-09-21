@@ -20,7 +20,7 @@ if(document.getElementById( 'canvasxx' )==null)
 var canvas = document.getElementById( 'canvasxx' ),
 		ctx = canvas.getContext( '2d' ),
 		// full screen dimensions
-		cw = window.innerWidth*0.7,
+		cw = window.innerWidth,
 		ch = window.innerHeight,
 		// firework collection
 		fireworks = [],
@@ -41,6 +41,8 @@ var canvas = document.getElementById( 'canvasxx' ),
 		my;
 		
 // set canvas dimensions
+document.getElementById('canvasxx_div').style.width=cw;
+document.getElementById('canvasxx_div').style.width=ch;
 canvas.width = cw;
 canvas.height = ch;
 //console.log(cw,ch)

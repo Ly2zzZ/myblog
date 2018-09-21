@@ -28,34 +28,34 @@ const devWebpackConfig = merge(baseWebpackConfig, {
 
   // these devServer options should be customized in /config/index.js
   devServer: {
-/*        before(app) {
-      app.get('/api/getArticles', (req, res) => {
-        res.json({
-          errno: 0,
-          data: appData.articles
-        })//接口返回json数据，上面配置的数据seller就赋值给data请求后调用
-      })
-      app.get('/api/articledetails', (req, res) => {
-        console.log(req.query.ID);
-        let temp=null;
-         for (let i=0;i<appData.articledetails.length;i++)
-            {
-              console.log(i,appData.articledetails[i].id)
-              if (appData.articledetails[i].id==req.query.ID)
-                temp= appData.articledetails[i];
-            }
-        res.json({
-          errno: 0,
-          data: temp
-        })//接口返回json数据，上面配置的数据seller就赋值给data请求后调用
-      })
-      app.get('/api/commits', (req, res) => {
-        res.json({
-          errno: 0,
-          data: appData.commits
-        })//接口返回json数据，上面配置的数据seller就赋值给data请求后调用
-      })
-    },*/
+        before(app) {
+      // app.get('/api/getArticles', (req, res) => {
+      //   res.json({
+      //     errno: 0,
+      //     data: appData.articles
+      //   })//接口返回json数据，上面配置的数据seller就赋值给data请求后调用
+      // })
+      // app.get('/api/articledetails', (req, res) => {
+      //   console.log(req.query.ID);
+      //   let temp=null;
+      //    for (let i=0;i<appData.articledetails.length;i++)
+      //       {
+      //         console.log(i,appData.articledetails[i].id)
+      //         if (appData.articledetails[i].id==req.query.ID)
+      //           temp= appData.articledetails[i];
+      //       }
+      //   res.json({
+      //     errno: 0,
+      //     data: temp
+      //   })//接口返回json数据，上面配置的数据seller就赋值给data请求后调用
+      // })
+      // app.get('/api/commits', (req, res) => {
+      //   res.json({
+      //     errno: 0,
+      //     data: appData.commits
+      //   })//接口返回json数据，上面配置的数据seller就赋值给data请求后调用
+      // })
+    },
     clientLogLevel: 'warning',
     historyApiFallback: {
       rewrites: [

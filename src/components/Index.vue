@@ -1,14 +1,17 @@
 <template>
   <div id="homepage">  
-
-  	<canvas id="canvasxx">Canvas is not supported in your browser.</canvas>
-
+	<div id="canvasxx_div">
+  		<canvas id="canvasxx">Canvas is not supported in your browser.</canvas>
+	</div>
   	<div class="home_content">
   		<p class="left_in">暂时想不出首页应该放些什么狂拽酷炫的东西</p><br>
   		<p class="right_in">但是不放些什么狂拽酷炫的东西岂不是很没有面子</p><br>
   		<p class="left_in">我这么说,你应该懂了吧</p><br>
+		
 
-  		<canvas id="luoyu_canvas" width="400px" height="250"></canvas> 
+		<canvas id="luoyu_canvas" width="400px" height="250px"></canvas> 
+
+  		
 
 		<svg id="luoyu_svg" width="390" height="249">
 		  <path fill="none" stroke="#000" stroke-width="1.5" id="svg_4" d="m51.5,29.5c0,1 -1,4 -3,12c-3,12 -4.91879,23.01276 -7,36c-1.92497,12.01227 -3.49957,23.96881 -4,36c-0.37403,8.99223 0,16 0,20c0,4 0.64073,7.05165 0,11c-0.50654,3.12144 -1,6 -1,8c0,2 1.90779,4.49623 6,5c6.94755,0.85529 16.02184,-1.89375 26,-4c9.02077,-1.90416 19,-4 23,-6l2,-1l1,0l0,-1"/>
@@ -33,12 +36,22 @@ export default {
     }
   },
   mounted(){
+				
   }
 }
 </script>
 
 
 <style scoped>
+#canvasxx_div{
+    position: absolute;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+		z-index: -1;
+}
 span{
 	display: block;
     color: #999;
@@ -58,8 +71,12 @@ p{
 	overflow-x: hidden;
 }
 #canvasxx{
-  position:absolute;
-  z-index:-1;
+    position: absolute;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
 .home_content{
 	width:70%;

@@ -330,10 +330,18 @@ a:hover{
 	text-align: justify;
 	width: 70%;
 	font-family: Lato,PingFang SC,Microsoft YaHei,sans-serif;
+
+	border-style: hidden;
+    border-radius: 5px;
+    box-shadow: rgba(25, 26, 26, 0.2) 0px 1px 5px 1px;
+    padding: 0px 10px;
 }
 
 .editor-container{
 	clear:both;
+	display: inline-block;
+    width: 70%;
+
 }
 
 

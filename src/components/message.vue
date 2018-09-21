@@ -125,7 +125,7 @@ export default {
         }
 		this.contents.push({"name":this.textarea.name,"content":this.textarea.content,"reply":[]})
 
-/*    this.$ajax.get('/api/addcommits', {
+    this.$ajax.get('/api/addcommits', {
         params: {
           Pid:this.commitsOb,
           name:this.textarea.name,
@@ -137,12 +137,12 @@ export default {
         console.log(response)
         this.commitsOb++;
         this.Notify("评论成功")
-        //console.log("successful!!!!!!!!!!!!!!!!!!!")
+        this.textarea.content = "";
       })
       .catch(function (error) {
         this.Notify("评论失败...")
         console.log(error);
-      });*/
+      });
 
 		//console.log(this.contents)
 	},
