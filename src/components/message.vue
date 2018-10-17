@@ -17,7 +17,7 @@
 		  v-model="textarea.name">
 		</input> -->
 
-    <el-button style="display: inline-block; height: 3em;width:10%;float:right" 
+    <el-button style="display: inline-block; height: 3em;width:28%;float:right;max-width:180px;" 
     @click="Addcommits()">
        添加留言
       </el-button>
@@ -26,15 +26,15 @@
 
 <div id="mainmessage">
 	<template v-for="(item,index) in content">
-	<el-card class="box-card">
+	<el-card class="box-card" :key=index>
   	<div slot="header" class="clearfix">
     	<span>{{item.name}}</span>
     	<el-button style="float: right; padding: 1px 0" type="text" @click="something(index,item.Pid)">回复Ta</el-button>
   	</div>
   	<p>{{item.content}}</p>
 
-  	<template v-for="(items,indexs) in item.reply">
- 	 <div  class="text item">
+  	<template v-for="(items,index) in item.reply">
+ 	 <div  class="text item" :key=index>
     	<el-card class="box-card">
     		<span>{{items.name}} 回复: {{item.name}}</span>
     		<p>{{items.content}}</p>
@@ -106,6 +106,7 @@ export default {
       if (this.textarea.content == "")
       {
           this.Notify("请输入内容")
+          return ;
       }
 
       if (this.$store.getters.getusername.name==undefined)
@@ -152,12 +153,9 @@ export default {
   		this.dialogFormVisible = true;
   	},
   	addreply(){
-      this.reply.name=this.$store.getters.getusername;
+      this.reply.name=this.$store.getters.getusername.username=="" ? "吃瓜游客":this.$store.getters.getusername.username;
+      this.dialogFormVisible = false;
 
-  		this.dialogFormVisible = false;
-  		//console.log(this.contents[this.replyNow])
-  		//console.log(this.reply)
-  		//console.log(this.replyNow)
       this.$ajax.get('/api/addreply', {
           params: {
             Rid:this.Nowreply,
@@ -208,6 +206,15 @@ export default {
   flex-wrap:wrap;
   width: 100%;
 }
+
+@media screen and (max-width: 768px){
+  #mainmessage{
+    font-size: 1.3em;
+  }
+}
+
+
+
 #inputname{
   margin-top: 1em;
 }
@@ -224,11 +231,11 @@ export default {
 }
 
 #messagebox{
-	width: 70%;
+  width: 100%;
+  max-width: 1000px;
   right: 0;
   left: 0;
   margin:auto;
-
 }
 .el-card{
 	margin-bottom: 1em;
@@ -257,10 +264,7 @@ export default {
   .box-card {
     height: auto;
     width: 250px;
-    width: 250px;
-    span{
-      margin: 0;
-    }
+    flex: auto;
   }
 .el-dialog__footer {
     padding: 0px;
@@ -269,6 +273,13 @@ export default {
 .rebutton{
   display: inline-block;
   width: 30%;
+}
+
+.el-card__header{
+  padding: 10px 20px!important;
+}
+.el-card__body{
+  padding: 10px !important;
 }
 </style>
 

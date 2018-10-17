@@ -68,7 +68,7 @@ export default {
   overflow: auto;
   background: #fff;
   
-  top:20%;
+  top:200px;
   left: 0;
   right:0;
   margin: auto;                    
@@ -79,6 +79,21 @@ export default {
   line-height: 1.6;
   overflow: hidden;
 }
+
+@media screen and (max-width: 1024px){
+  .dialog-content {
+    max-width: 60%;
+  }
+}
+
+@media screen and (max-width: 768px){
+  .dialog-content {
+    max-width: 88%;
+  }
+}
+
+
+
 .dialog-close {
   position: absolute;
   right: 5px;

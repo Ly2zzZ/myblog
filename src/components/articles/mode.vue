@@ -52,7 +52,7 @@
 
 	<div v-else class="commitbox">
 		<template  v-for="item in commits">
-			<el-card  class="box-card">
+			<el-card class="box-card">
 				<div slot="header" class="clearfix">
 					<span>{{item.name}}:    
 						<el-button style="float: right; padding: 3px 0" type="text"
@@ -315,7 +315,7 @@ p{
 }
 #artmode{
 	height: auto;
-	width: 100%;
+	width: 98%;
 	text-align: center;
 }
 a{
@@ -328,7 +328,9 @@ a:hover{
 #showcontent{
 	display: inline-block;
 	text-align: justify;
-	width: 70%;
+	width: 98%;
+	max-width: 1000px;
+	overflow-y: auto;
 	font-family: Lato,PingFang SC,Microsoft YaHei,sans-serif;
 
 	border-style: hidden;
@@ -348,7 +350,8 @@ a:hover{
 .message{
 	text-align: justify;
 	display: inline-block;
-	width: 70%;
+	width: 98%;
+	max-width: 1000px;
 }
 
 .buttton_edit{
@@ -403,4 +406,7 @@ a:hover{
 	cursor: not-allowed;
 }
 
+img{
+	max-width: 100%;
+}
 </style>

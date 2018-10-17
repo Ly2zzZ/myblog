@@ -27,7 +27,7 @@
         <template slot="title">Categories</template>
 
         <template v-for="(item,index) in catelist">
-          <el-menu-item index='/Categories/item' @click="ChangeCate(item)">
+          <el-menu-item :key="index" index='/Categories/item' @click="ChangeCate(item)">
             {{item}}
           </el-menu-item>
         </template>
@@ -43,11 +43,11 @@
 
     </el-menu>
   </div>
-  <li class="el-icon-arrow-right folder " 
+  <li class="el-icon-arrow-right folder" 
   v-on:click="ishow=ishow==true?false:true"></li>
-  <transition name="bounce">
+  <transition-group name="bounce">
 
-    <div class="Phoneshow" v-if="gishow">
+    <div class="Phoneshow" v-if="gishow" :key=1>
       <div class="folder-in" v-on:click="ishow=ishow==true?false:true"></div>
 
       <el-menu class="el-menu-vertical-demo" router  :collapse="isCollapse">
@@ -79,7 +79,7 @@
         </template>
 
         <template v-for="(item,index) in catelist">
-          <el-menu-item index='/Categories/item' @click="ChangeCate(item)">
+          <el-menu-item :key="index" index='/Categories/item' @click="ChangeCate(item)">
             {{item}}
           </el-menu-item>
         </template>
@@ -89,7 +89,7 @@
   </div>
 
 
-  <el-dialog title="请输入信息:" :visible.sync="dialogFormVisible">
+  <el-dialog title="请输入信息:" :visible.sync="dialogFormVisible" :key=2>
     <el-form>
       <el-form-item label="标题名称:">
         <el-input v-model="form.title"></el-input>
@@ -97,7 +97,7 @@
 
       <el-form-item label="分类至:" class="inline-form inline-form-left">
         <el-select v-model="form.cate" placeholder="请选择分类">
-          <el-option v-for="(item,index) in catelist" :label="item" :value="item" key="index"></el-option>
+          <el-option v-for="(item,index) in catelist" :label="item" :value="item" :key="index"></el-option>
         </el-select>
       </el-form-item>
 
@@ -116,7 +116,7 @@
     <el-button class="rebutton" @click="dialogFormVisible = false">取 消</el-button>
   </div>
 </el-dialog>
-</transition>
+</transition-group>
 
 </div>
 </template>
@@ -148,7 +148,7 @@ export default {
     return this.ishow;
   }
 },
-methods: {    
+methods: {
   onSubmit(){
     this.form.readnum=100;
     this.form.liked=100;
@@ -242,8 +242,8 @@ methods: {
     width: 50px;
     height: 50px;
     position: fixed;
-    left: 0px;
-    top: 50%;
+    left: -15px;
+    top: 50vh;
     cursor: pointer;
   }
   el-menu{
@@ -256,7 +256,7 @@ methods: {
   .Phoneshow{
     position: fixed;
     left: 0px;
-    top: 50%;
+    top:  50vh;
     width: 30%;
     z-index: 1;
     transform: translate(0,-50%);

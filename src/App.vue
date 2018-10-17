@@ -52,156 +52,181 @@
 
 
 <script>
-import { donghua } from './assets/donghua.js'
+import { donghua } from "./assets/donghua.js";
 
-import myHead from './components/head'
+import myHead from "./components/head";
 
-import Dialog from './components/dialog'
-import LogForm from './components/logForm'
-import RegForm from './components/regForm'
+import Dialog from "./components/dialog";
+import LogForm from "./components/logForm";
+import RegForm from "./components/regForm";
 
 export default {
-  name:"App",
+  name: "App",
   components: {
     MyDialog: Dialog,
     LogForm,
     RegForm,
     myHead
   },
-  data(){
+  data() {
     return {
-      transitionName: 'slide-left',
-        isShowAboutDialog: false,
-        isShowLogDialog: false,
-        isShowRegDialog: false,
-        username: ''
-    }
+      transitionName: "slide-left",
+      isShowAboutDialog: false,
+      isShowLogDialog: false,
+      isShowRegDialog: false,
+      username: ""
+    };
   },
-  computed:{
-    logname (){
+  computed: {
+    logname() {
       return this.username;
     }
   },
-  methods:{
-    quit(){
-      this.username='';
-      this.$store.dispatch('getusernameAction',{});
-      this.setCookie('username','',1)
-      this.setCookie('userid','',1)
+  methods: {
+    quit() {
+      this.username = "";
+      this.$store.dispatch("getusernameAction", {});
+      this.setCookie("username", "", 1);
+      this.setCookie("userid", "", 1);
       location.reload();
     },
-    logClick () {
-      this.isShowLogDialog = true
+    logClick() {
+      this.isShowLogDialog = true;
     },
-    regClick () {
-      this.isShowRegDialog = true
+    regClick() {
+      this.isShowRegDialog = true;
     },
-    closeDialog (attr) {
-      this[attr] = false
+    closeDialog(attr) {
+      this[attr] = false;
     },
-    onSuccessLog (data) {
-      console.log(data)
-      this.closeDialog ('isShowLogDialog')
-      this.username = data
+    onSuccessLog(data) {
+      console.log(data);
+      this.closeDialog("isShowLogDialog");
+      this.username = data;
     },
-    aboutClick () {
-      this.isShowAboutDialog = true
+    aboutClick() {
+      this.isShowAboutDialog = true;
     }
   },
-  created: function () {
-   if (this.$store.getters.getusername.name==undefined)
-   {
-      let t=this.getCookie('username');
-      let tt=this.getCookie('userid');
-      this.username=t;
-      this.$store.dispatch('getusernameAction',{"username":t,'"userid':tt});
-   }
-   else{
-    this.username=this.$store.getters.getusername.name
-   }
-
-  },
-  watch:{
-    $route(to,from){
-      if (this.$route.path=='/' && from.path!='/' && this.getin==2)
-         {
-          console.log(this.getin)
-          donghua();
-          this.getin=1;
-        }
+  created: function() {
+    if (this.$store.getters.getusername.name == undefined) {
+      let t = this.getCookie("username");
+      let tt = this.getCookie("userid");
+      this.username = t;
+      this.$store.dispatch("getusernameAction", { username: t, '"userid': tt });
+    } else {
+      this.username = this.$store.getters.getusername.name;
     }
   },
-  mounted (){
-    var that=this;
-    window.onload = function(){
+  watch: {
+    $route(to, from) {
+      if (this.$route.path == "/" && from.path != "/" && this.getin == 2) {
+        console.log(this.getin);
         donghua();
-        if (that.$route.path!='/')
-          that.getin=2;
+        this.getin = 1;
+      }
     }
-}
-}
-
-/*    this.$ajax.get('http://www.shuaibiyu.cn/api/getArticles')
-      .then((response)=>{
-        console.log(response)
-      })
-      .catch(function (error) {
-        this.Notify("评论失败...")
-        console.log(error);
-      });*/
+  },
+  mounted() {
+    var that = this;
+    window.onload = function() {
+      donghua();
+      if (that.$route.path != "/") that.getin = 2;
+    };
+  }
+};
 </script>
 
 
 <style>
-@media screen and (max-width: 3000px){
-  .PCshow{
+
+.shutter {
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+}
+
+@media screen and (max-width: 3000px) {
+  .PCshow {
     display: block;
   }
-  .Phoneshow{
+  .Phoneshow {
     display: none;
   }
 }
-@media screen and (max-width: 1100px){
-  .PCshow{
+@media screen and (max-width: 1024px) {
+  .PCshow {
     display: none;
   }
-  .Phoneshow{
+  .Phoneshow {
     display: block;
+  }
+  html {
+    font-size: 24px;
+    zoom:1;
   }
 }
 
 
 
-#ArticleHomePage{
-    width: 100%;
-    min-height: 900px;
-    height: auto; 
+@media screen and (max-width: 768px) {
+  .PCshow {
+    display: none;
+  }
+  .Phoneshow {
+    display: block;
+  }
+  
+  html {
+    font-size: 15px;
+  }
 }
-body{
-  font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
+
+@media screen and (max-width: 500px) {
+  .PCshow {
+    display: none;
+  }
+  .Phoneshow {
+    display: block;
+  }
+  
+  html {
+    font-size: 12px;
+  }
+}
+
+#ArticleHomePage {
+  width: 100%;
+  min-height: 900px;
+  height: auto;
+  min-height: 100vh;
+}
+
+body {
+  font-family: "Lato", "PingFang SC", "Microsoft YaHei", sans-serif;
   margin: 0;
   padding: 0;
   overflow-x: hidden;
 }
 .el-header {
-    padding-left:100px;
-    text-align: center;
-    line-height: 60px;
-  }
+  padding-left: 100px;
+  text-align: center;
+  line-height: 60px;
+}
 .el-footer {
-    color: #333;
-    text-align: center;
-    line-height: 1em;
-/*    background-color: #9caebf; */
-  }
-  .el-main {
-    overflow:hidden;
-    height: auto;
-    padding-left:1em;
-    padding-right:1em;
-    margin:1em;
-  }
-  
+  color: #333;
+  text-align: center;
+  line-height: 1em;
+}
+.el-main {
+  height: auto;
+  overflow: hidden;
+  padding-left: 1em;
+  padding-right: 1em;
+  margin: 1em;
+}
+
 body > .el-container {
   margin-bottom: 1em;
   background-color: #636b6f;
@@ -216,29 +241,29 @@ body > .el-container {
   line-height: 1em;
 }
 
-.outin-enter{
+.outin-enter {
   opacity: 0;
 }
-.outin-enter-active{
+.outin-enter-active {
   transition: 0.5s;
 }
-.outin-enter-to{
+.outin-enter-to {
   opacity: 1;
 }
-.outin-leave{
+.outin-leave {
   opacity: 1;
 }
-.outin-leave-to{
-  opacity:0;
+.outin-leave-to {
+  opacity: 0;
 }
-.outin-leave-active{
+.outin-leave-active {
   transition: 0.5s;
 }
 
 .head-nav {
-/*  float: right;*/
+  /*  float: right;*/
   position: absolute;
-  top:-1.5em;
+  top: -1.5em;
   right: 1em;
   font-size: 1em;
 }
@@ -252,7 +277,8 @@ body > .el-container {
 .nav-pile {
   padding: 0 10px;
 }
-ol, ul {
+ol,
+ul {
   list-style: none;
 }
 
@@ -267,7 +293,6 @@ ol, ul {
   background: #4fc08d;
 }
 .g-form {
-  
 }
 .g-form-line {
   padding: 10px 0;
@@ -296,16 +321,14 @@ ol, ul {
   padding-left: 15px;
 }
 
-#first_in{
+#first_in {
   transition: width 2s;
-  width:0%;
+  width: 0%;
   opacity: 0;
 }
-#first_in:hover{
-  width:100%;
+#first_in:hover {
+  width: 100%;
 }
-
-
 
 .shutter {
   position: absolute;
@@ -318,22 +341,22 @@ ol, ul {
   transition: all 2s;
 }
 @media (orientation: landscape) {
-.shutter.open {
-  width: 176vw;
-  height: 176vw;
-  margin-left: -88vw;
-  margin-top: -88vw;
-  transform: rotate(180deg);
-}
+  .shutter.open {
+    width: 176vw;
+    height: 176vw;
+    margin-left: -88vw;
+    margin-top: -88vw;
+    transform: rotate(180deg);
+  }
 }
 @media (orientation: portrait) {
-.shutter.open {
-  width: 176vh;
-  height: 176vh;
-  margin-left: -88vh;
-  margin-top: -88vh;
-  transform: rotate(180deg);
-}
+  .shutter.open {
+    width: 176vh;
+    height: 176vh;
+    margin-left: -88vh;
+    margin-top: -88vh;
+    transform: rotate(180deg);
+  }
 }
 .shutter > div {
   position: absolute;
@@ -344,7 +367,7 @@ ol, ul {
 .shutter > div::before,
 .shutter > div::after {
   position: absolute;
-  content: '';
+  content: "";
   height: 1000px;
   width: 2000px;
   background: #343434;

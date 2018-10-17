@@ -1,8 +1,8 @@
 <template>
   <div id="ArticleHomePage">
     <div>
-        <template v-for="item in showpage">
-        <div id='EachArticle' :class=item.cate>
+        <template v-for="(item,index) in showpage">
+        <div id='EachArticle' :class="item.cate" :key=index>
         <router-link  
         :to="{path: '/article/'+item.id }" 
         style="text-decoration:none">

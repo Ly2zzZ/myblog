@@ -1,27 +1,27 @@
 <template>
   <div id="ArticleHomePage">
     <div >
-      <template v-for="item in showpage">
-        <div id='EachArticle' :class=item.cate>
-        <router-link 
-        :to="{path: '/article/'+item.id }" 
-        style="text-decoration:none">
-           <p >{{item.title}}</p>
-        </router-link>
-        <span>
-        <i class="el-icon-date"></i> 
-        发表于 {{item.date}}
-        |
-        <i class="el-icon-tickets"></i> 
-        分类于 
-        <a href="">{{item.cate}}</a>
-        |
-        <i class="el-icon-view"></i>
-        阅读数 {{item.readnum}}
-        |
-        <i class="el-icon-star-off"></i>
-        喜欢 {{item.readnum}}
-        </span>
+      <template v-for="(item,index) in showpage">
+        <div id='EachArticle' :class=item.cate :key=index>
+          <router-link 
+          :to="{path: '/article/'+item.id }" 
+          style="text-decoration:none">
+            <p >{{item.title}}</p>
+          </router-link>
+          <span>
+          <i class="el-icon-date"></i> 
+          发表于 {{item.date}}
+          |
+          <i class="el-icon-tickets"></i> 
+          分类于 
+          <a href="">{{item.cate}}</a>
+          |
+          <i class="el-icon-view"></i>
+          阅读数 {{item.readnum}}
+          |
+          <i class="el-icon-star-off"></i>
+          喜欢 {{item.readnum}}
+          </span>
         </div>
       </template>
     </div>
@@ -142,20 +142,21 @@ span{
     display: block;
     color: #999;
     font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
-    font-size: 12px;
+    font-size: 1rem;
     text-align: center;
     margin-bottom: 80px; 
 }
 p{
+      font-size: 1.2rem;
       color:black;
       text-align: center;
 }
 a{
- 
  color:#999;
   text-decoration: none;
 }
 a:hover{
   text-decoration: underline;
 }
+
 </style>
