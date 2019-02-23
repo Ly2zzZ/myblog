@@ -139,5 +139,13 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+.g-form-input input {
+  width: 100%;
+}
+.g-form-label {
+    width: 85px;
+}
+.g-form-btn {
+  padding-left: 85px;
+}
 </style>

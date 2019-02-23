@@ -139,6 +139,16 @@ export default {
 
 
 <style>
+@media only screen and (max-width: 320px), only screen and (max-device-width:320px) {
+    html {
+	    font-size:10px;
+    }
+}
+@media only screen and (max-width: 640px), only screen and (max-device-width:640px) {
+    html {
+	    font-size:20px;
+    }
+}
 
 .shutter {
   -webkit-transform: translate3d(0, 0, 0);
@@ -148,51 +158,37 @@ export default {
 }
 
 @media screen and (max-width: 3000px) {
-  .PCshow {
+  .PCshow,.homepage_pc_main {
     display: block;
   }
-  .Phoneshow {
+  .Phoneshow,.homepage_ph_main {
     display: none;
   }
 }
 @media screen and (max-width: 1024px) {
-  .PCshow {
+  .PCshow,.homepage_pc_main {
     display: none;
   }
-  .Phoneshow {
+  .Phoneshow,.homepage_ph_main {
     display: block;
-  }
-  html {
-    font-size: 24px;
-    zoom:1;
   }
 }
 
-
-
 @media screen and (max-width: 768px) {
-  .PCshow {
+  .PCshow,.homepage_pc_main {
     display: none;
   }
-  .Phoneshow {
+  .Phoneshow,.homepage_ph_main {
     display: block;
-  }
-  
-  html {
-    font-size: 15px;
   }
 }
 
 @media screen and (max-width: 500px) {
-  .PCshow {
+  .PCshow,.homepage_pc_main {
     display: none;
   }
-  .Phoneshow {
+  .Phoneshow,.homepage_ph_main {
     display: block;
-  }
-  
-  html {
-    font-size: 12px;
   }
 }
 
