@@ -2,6 +2,8 @@
 
 > A Vue.js project
 
+个人网站,线上地址http://www.shuaibiyu.cn/
+
 ## Build Setup
 
 ``` bash
